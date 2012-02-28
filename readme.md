@@ -1,6 +1,7 @@
 # Zircote_Hal
  * http://stateless.co/hal_specification.html
  * http://blog.stateless.co/post/13296666138/json-linking-with-hal
+ * http://www.mnot.net/blog/2011/11/25/linking_in_json
 
 ```php
 <?php
