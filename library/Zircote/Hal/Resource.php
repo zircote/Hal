@@ -1,16 +1,38 @@
 <?php
-
-
-class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
+/**
+ * 
+ * @author zircote
+ * @package Zircote_Hal
+ * 
+ */
+class Zircote_Hal_Resource
 {
+    /**
+     * Internal storage of `Zircote_Hal_Link` objects
+     * @var array
+     */
     protected $_links = array();
+    /**
+     * Internal storage of primitive types
+     * @var array
+     */
     protected $_data = array();
+    /**
+     * Internal storage of `Zircote_Hal_Resource` objects
+     * @var array
+     */
     protected $_embedded = array();
-    public function __construct($href, $name = null)
+    /**
+     * 
+     * @param string $href
+     * @param string $name
+     */
+    public function __construct($href, $rel = null, $title = null, $name = null, $hreflang = null)
     {
-        parent::__construct($href, 'self', $name = null);
+        parent::__construct($href, 'self', $title = null, $name = null, $hreflang = null);
         $self = new Zircote_Hal_Link(
-            $this->getHref(), $this->getRel(), $this->getName()
+            $this->getHref(), $this->getRel(), $this->getTitle(),
+            $this->getName(), $this->getHreflang()
         );
         $this->setLink($self);
     }
@@ -103,10 +125,18 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
         }
         return $result;
     }
+    /**
+     * 
+     * @return string
+     */
     public function __toJson()
     {
         return json_encode($this->toArray());
     }
+    /**
+     * 
+     * @return string
+     */
     public function __toString()
     {
         return $this->__toJson();
