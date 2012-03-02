@@ -198,5 +198,25 @@ EOF;
         $expected = Zend_Json::decode($JSON);
         $this->assertEquals($expected, $actual);
     }
+    /**
+     * @group Simple
+     */
+    public function testSimple()
+    {
+        $parent = new Zircote_Hal_Resource('/dogs');
+        /* Add any relevent links */
+        $parent->setLink(new Zircote_Hal_Link('/dogs?q={text}', 'search'));
+        $dogs[1] =  new Zircote_Hal_Resource('/dogs/1');
+        $dogs[1]->setData(array('id' => '1', 'name' => 'tiber', 'color' => 'black'));
+        $dogs[2] =  new Zircote_Hal_Resource('/dogs/2');
+        $dogs[2]->setData(array('id' => '2', 'name' => 'sally', 'color' => 'white'));
+        $dogs[3] =  new Zircote_Hal_Resource('/dogs/3');
+        $dogs[3]->setData(array('id' => '3', 'name' => 'fido', 'color' => 'gray'));
+        /* Add the embedded resources */
+        foreach ($dogs as $dog) {
+            $parent->setEmbedded('dogs', $dog);
+        }
+        echo $parent->getXML()->asXML();
+    }
 }
 
