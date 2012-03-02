@@ -1,10 +1,10 @@
 <?php
 /**
- * 
+ *
  * @author zircote
  * @package Zircote_Hal
  */
-class Zircote_Hal_Link
+class Zircote_Hal_Link extends Zircote_Hal_AbstractHal
 {
     /**
      * For labeling the destination of a link with a human-readable identifier.
@@ -20,12 +20,12 @@ class Zircote_Hal_Link
     protected $_rel;
     /**
      * - <b>As a resource:</b>
-     *     Content embedded within a Resource element MAY be a full, partial, summary, 
-     *     or incorrect representation of the content available at the target URI. 
-     *     Applications which use HAL MAY clarify the integrity of specific embedded 
+     *     Content embedded within a Resource element MAY be a full, partial, summary,
+     *     or incorrect representation of the content available at the target URI.
+     *     Applications which use HAL MAY clarify the integrity of specific embedded
      *     content via the description of the relevant @rel value.
      * - <b>As a link:</b>
-     *     This attribute MAY contain a URI template. Whether or not this is the case 
+     *     This attribute MAY contain a URI template. Whether or not this is the case
      *     SHOULD be indicated to clients by the @rel value.
      *
      * @var string
@@ -33,21 +33,21 @@ class Zircote_Hal_Link
     protected $_href;
     /**
      *
-     * For distinguishing between Resource and Link elements that share the 
-     * same @rel value. The @name attribute SHOULD NOT be used exclusively 
-     * for identifying elements within a HAL representation, it is intended 
+     * For distinguishing between Resource and Link elements that share the
+     * same @rel value. The @name attribute SHOULD NOT be used exclusively
+     * for identifying elements within a HAL representation, it is intended
      * only as a 'secondary key' to a given @rel value.
      * @var string
      */
     protected $_name;
     /**
-     * For indicating what the language of the result of dereferencing the 
+     * For indicating what the language of the result of dereferencing the
      * link should be.
      * @var string
      */
     protected $_hreflang;
     /**
-     * 
+     *
      * @param string $href
      * @param string $rel
      * @param string $title
@@ -161,7 +161,7 @@ class Zircote_Hal_Link
             $link['title'] = $this->getTitle();
         }
         if($this->getRel()){
-            $link['rel'] = $this->getRel();
+//             $link['rel'] = $this->getRel();
         }
         if($this->getName()){
             $link['name'] = $this->getName();
@@ -170,5 +170,14 @@ class Zircote_Hal_Link
             $link['hreflang'] = $this->getHreflang();
         }
         return $link;
+    }
+    /**
+     * @return SimpleXMLElement
+     */
+    public function addLink(SimpleXMLElement $xml)
+    {
+        $this->_xml = new SimpleXMLElement('<link/>');
+        $this->setXMLAttributes($this);
+        return $this->_xml;
     }
 }

@@ -1,11 +1,11 @@
 <?php
 /**
- * 
+ *
  * @author zircote
  * @package Zircote_Hal
- * 
+ *
  */
-class Zircote_Hal_Resource
+class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
 {
     /**
      * Internal storage of `Zircote_Hal_Link` objects
@@ -23,18 +23,15 @@ class Zircote_Hal_Resource
      */
     protected $_embedded = array();
     /**
-     * 
+     *
      * @param string $href
      * @param string $name
      */
     public function __construct($href, $rel = null, $title = null, $name = null, $hreflang = null)
     {
-        parent::__construct($href, 'self', $title = null, $name = null, $hreflang = null);
-        $self = new Zircote_Hal_Link(
-            $this->getHref(), $this->getRel(), $this->getTitle(),
-            $this->getName(), $this->getHreflang()
+        $this->setLink(
+            new Zircote_Hal_Link($href, 'self', $title, $name, $hreflang)
         );
-        $this->setLink($self);
     }
     /**
      * @return Zircote_Hal_Link
@@ -126,7 +123,7 @@ class Zircote_Hal_Resource
         return $result;
     }
     /**
-     * 
+     *
      * @return string
      */
     public function __toJson()
@@ -134,11 +131,115 @@ class Zircote_Hal_Resource
         return json_encode($this->toArray());
     }
     /**
-     * 
+     *
      * @return string
      */
     public function __toString()
     {
         return $this->__toJson();
+    }
+    /**
+     *
+     * @return SimpleXMLElement
+     */
+    public function getXML($xml = null)
+    {
+        if(! $xml instanceof SimpleXMLElement){
+            $xml = new SimpleXMLElement('<resource></resource>');
+        }
+        $this->_xml = $xml;
+        $this->setXMLAttributes($this->_xml, $this->getSelf());
+        foreach ($this->_links as $link) {
+            $this->_addLinks($link);
+        }
+        $this->_addData($this->_xml, $this->_data);
+        $this->_getEmbedded($this->_embedded);
+        return $this->_xml;
+    }
+    /**
+     *
+     * @param mixed $embedded
+     * @param string|null $_rel
+     */
+    protected function _getEmbedded($embedded, $_rel = null)
+    {
+        /* @var $embed Zircote_Hal_Resource */
+        foreach ($embedded as $rel => $embed) {
+            if($embed instanceof Zircote_Hal_Resource){
+                $rel = is_numeric($rel) ? $_rel : $rel;
+                $this->_getEmbRes($embed)->addAttribute('rel', $rel);
+            } else {
+                $this->_getEmbedded($embed,$rel);
+            }
+        }
+    }
+    protected function _getEmbRes(Zircote_Hal_Resource $embed)
+    {
+        $resource = $this->_xml->addChild('resource');
+        return $embed->getXML($resource);
+    }
+    /**
+     *
+     * @param SimpleXMLElement $xml
+     * @return Zircote_Hal_Resource
+     */
+    public function setXML(SimpleXMLElement $xml)
+    {
+        $this->_xml = $xml;
+        return $this;
+    }
+    /**
+     *
+     * @param SimpleXMLElement $xml
+     * @param array $data
+     * @param string $key
+     */
+    protected function _addData(SimpleXMLElement $xml, array $data, $key = null)
+    {
+        if(null !== $key && !is_numeric($key)){
+            $node = $xml->addChild($key);
+            $this->_addData($node, $data);
+        } else {
+            foreach ($data as $_key => $value) {
+                if(!is_numeric($_key) && is_array($value)){
+                    foreach ($value as $v) {
+                        $c = $xml->addChild($_key)->addChild(rtrim($_key, 's'));
+                        foreach ($v as $name => $value) {
+                            $c->addChild($name, $value);
+                        }
+                    }
+                }
+                elseif(!is_numeric($_key) && !is_array($value) && $value){
+                    if($key && !is_numeric($key)){
+                        $_k = $key;
+                    } else {
+                        $_k = $_key;
+                    }
+                        $xml->addChild($_k, $value);
+                } else {
+                    $this->_addData($xml, $value, $_key);
+                }
+            }
+        }
+    }
+    /**
+     *
+     * @param Zircote_Hal_Link $link
+     */
+    protected function _addLinks(Zircote_Hal_Link $link)
+    {
+        if($link->getRel() != 'self' && !is_numeric($link->getRel())){
+            $this->_addLink($link);
+        }
+    }
+    /**
+     *
+     * @param Zircote_Hal_Link $link
+     * @return Zircote_Hal_Resource
+     */
+    protected function _addLink(Zircote_Hal_Link $link)
+    {
+        $this->setXMLAttributes($this->_xml->addChild('link'), $link);
+        return $this;
     }
 }
