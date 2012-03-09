@@ -208,7 +208,7 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
      * @param array $data
      * @param string $key
      */
-    protected function _addData(SimpleXMLElement $xml, array $data, $key = null)
+    protected function _addData(SimpleXMLElement $xml, $data, $key = null)
     {
         if(null !== $key && !is_numeric($key)){
             $node = $xml->addChild($key);
@@ -230,7 +230,7 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
                         $_k = $_key;
                     }
                         $xml->addChild($_k, $value);
-                } else {
+                } elseif(is_array($value)){
                     $this->_addData($xml, $value, $_key);
                 }
             }
