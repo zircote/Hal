@@ -22,7 +22,7 @@
  *
  *
  */
-abstract class Zircote_Hal_AbstractHal
+abstract class Hal_AbstractHal
 {
     /**
      *
@@ -31,10 +31,10 @@ abstract class Zircote_Hal_AbstractHal
     protected $_xml;
     /**
      * @param SimpleXMLElement $xml
-     * @param Zircote_Hal_Link $link
-     * @return Zircote_Hal_AbstractHal
+     * @param Hal_Link $link
+     * @return Hal_AbstractHal
      */
-    public function setXMLAttributes(SimpleXMLElement $xml, Zircote_Hal_Link $link)
+    public function setXMLAttributes(SimpleXMLElement $xml, Hal_Link $link)
     {
         $xml->addAttribute('href', $link->getHref());
         if($link->getRel() && $link->getRel() !== 'self'){

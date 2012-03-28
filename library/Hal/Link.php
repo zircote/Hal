@@ -17,9 +17,9 @@
  * limitations under the License.
  *
  * @author zircote
- * @package Zircote_Hal
+ * @package Hal
  */
-class Zircote_Hal_Link extends Zircote_Hal_AbstractHal
+class Hal_Link extends Hal_AbstractHal
 {
     /**
      * For labeling the destination of a link with a human-readable identifier.
@@ -117,7 +117,7 @@ class Zircote_Hal_Link extends Zircote_Hal_AbstractHal
     }
     /**
      * @param string $rel
-     * @return Zircote_Hal_Link
+     * @return Hal_Link
      */
     public function setRel ($rel)
     {
@@ -126,7 +126,7 @@ class Zircote_Hal_Link extends Zircote_Hal_AbstractHal
     }
     /**
      * @param string $href
-     * @return Zircote_Hal_Link
+     * @return Hal_Link
      */
     public function setHref ($href)
     {
@@ -136,7 +136,7 @@ class Zircote_Hal_Link extends Zircote_Hal_AbstractHal
     /**
      *
      * @param string $name
-     * @return Zircote_Hal_Link
+     * @return Hal_Link
      */
     public function setName($name)
     {
@@ -145,7 +145,7 @@ class Zircote_Hal_Link extends Zircote_Hal_AbstractHal
     }
 	/**
      * @param string $title
-     * @return Zircote_Hal_Link
+     * @return Hal_Link
      */
     public function setTitle ($title)
     {
@@ -155,7 +155,7 @@ class Zircote_Hal_Link extends Zircote_Hal_AbstractHal
 
 	/**
      * @param string $hreflang
-     * @return Zircote_Hal_Link
+     * @return Hal_Link
      */
     public function setHreflang ($hreflang)
     {

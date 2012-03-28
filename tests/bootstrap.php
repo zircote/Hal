@@ -31,5 +31,6 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
-require_once 'Zend/Loader/Autoloader.php';
-Zend_Loader_Autoloader::getInstance()->registerNamespace('Zircote');
+require_once 'Hal/AbstractHal.php';
+require_once 'Hal/Link.php';
+require_once 'Hal/Resource.php';
