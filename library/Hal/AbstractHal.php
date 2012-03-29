@@ -24,31 +24,32 @@
  */
 abstract class Hal_AbstractHal
 {
-    /**
-     *
-     * @var SimpleXMLElement
-     */
-    protected $_xml;
-    /**
-     * @param SimpleXMLElement $xml
-     * @param Hal_Link $link
-     * @return Hal_AbstractHal
-     */
-    public function setXMLAttributes(SimpleXMLElement $xml, Hal_Link $link)
-    {
-        $xml->addAttribute('href', $link->getHref());
-        if($link->getRel() && $link->getRel() !== 'self'){
-            $xml->addAttribute('rel', $link->getRel());
-        }
-        if($link->getName()){
-            $xml->addAttribute('name', $link->getName());
-        }
-        if($link->getTitle()){
-            $xml->addAttribute('title', $link->getTitle());
-        }
-        if($link->getHreflang()){
-            $xml->addAttribute('hreflang', $link->getHreflang());
-        }
-        return $this;
-    }
+	/**
+	 *
+	 * @var SimpleXMLElement
+	 */
+	protected $_xml;
+
+	/**
+	 * @param SimpleXMLElement $xml
+	 * @param Hal_Link $link
+	 * @return Hal_AbstractHal
+	 */
+	public function setXMLAttributes(SimpleXMLElement $xml, Hal_Link $link)
+	{
+		$xml->addAttribute('href', $link->getHref());
+		if($link->getRel() && $link->getRel() !== 'self'){
+			$xml->addAttribute('rel', $link->getRel());
+		}
+		if($link->getName()){
+			$xml->addAttribute('name', $link->getName());
+		}
+		if($link->getTitle()){
+			$xml->addAttribute('title', $link->getTitle());
+		}
+		if($link->getHreflang()){
+			$xml->addAttribute('hreflang', $link->getHreflang());
+		}
+		return $this;
+	}
 }
