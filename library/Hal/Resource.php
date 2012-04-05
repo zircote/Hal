@@ -15,14 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @author zircote
- * @package Zircote_Hal
+ * @package Hal
  *
  */
-class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
+class Hal_Resource extends Hal_AbstractHal
 {
     /**
-     * Internal storage of `Zircote_Hal_Link` objects
+     * Internal storage of `Hal_Link` objects
      * @var array
      */
     protected $_links = array();
@@ -32,7 +31,7 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
      */
     protected $_data = array();
     /**
-     * Internal storage of `Zircote_Hal_Resource` objects
+     * Internal storage of `Hal_Resource` objects
      * @var array
      */
     protected $_embedded = array();
@@ -41,14 +40,15 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
      * @param string $href
      * @param string $name
      */
-    public function __construct($href, $rel = null, $title = null, $name = null, $hreflang = null)
+    public function __construct($href, array $data = array(), $title = null, $name = null, $hreflang = null)
     {
         $this->setLink(
-            new Zircote_Hal_Link($href, 'self', $title, $name, $hreflang)
+            new Hal_Link($href, 'self', $title, $name, $hreflang)
         );
+        $this->setData($data);
     }
     /**
-     * @return Zircote_Hal_Link
+     * @return Hal_Link
      */
     public function getSelf()
     {
@@ -63,10 +63,10 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
     }
     /**
      *
-     * @param Zircote_Hal_Link $link
-     * @return Zircote_Hal_Resource
+     * @param Hal_Link $link
+     * @return Hal_Resource
      */
-    public function setLink(Zircote_Hal_Link $link)
+    public function setLink(Hal_Link $link)
     {
         $this->_links[$link->getRel()] = $link;
         return $this;
@@ -74,7 +74,7 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
     /**
      *
      * @param array $data
-     * @return Zircote_Hal_Resource
+     * @return Hal_Resource
      */
     public function setData($rel, $data = null)
     {
@@ -89,10 +89,10 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
     }
     /**
      *
-     * @param Zircote_Hal_Resource $resource
-     * @return Zircote_Hal_Resource
+     * @param Hal_Resource $resource
+     * @return Hal_Resource
      */
-    public function setEmbedded($rel,Zircote_Hal_Resource $resource, $singular = false)
+    public function setEmbedded($rel,Hal_Resource $resource, $singular = false)
     {
         if($singular){
             $this->_embedded[$rel] = $resource;
@@ -177,9 +177,9 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
      */
     protected function _getEmbedded($embedded, $_rel = null)
     {
-        /* @var $embed Zircote_Hal_Resource */
+        /* @var $embed Hal_Resource */
         foreach ($embedded as $rel => $embed) {
-            if($embed instanceof Zircote_Hal_Resource){
+            if($embed instanceof Hal_Resource){
                 $rel = is_numeric($rel) ? $_rel : $rel;
                 $this->_getEmbRes($embed)->addAttribute('rel', $rel);
             } else {
@@ -187,7 +187,7 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
             }
         }
     }
-    protected function _getEmbRes(Zircote_Hal_Resource $embed)
+    protected function _getEmbRes(Hal_Resource $embed)
     {
         $resource = $this->_xml->addChild('resource');
         return $embed->getXML($resource);
@@ -195,7 +195,7 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
     /**
      *
      * @param SimpleXMLElement $xml
-     * @return Zircote_Hal_Resource
+     * @return Hal_Resource
      */
     public function setXML(SimpleXMLElement $xml)
     {
@@ -217,7 +217,7 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
             foreach ($data as $_key => $value) {
                 if(!is_numeric($_key) && is_array($value)){
                     foreach ($value as $v) {
-                        $c = $xml->addChild($_key)->addChild(rtrim($_key, 's'));
+                        $c = $xml->addChild($_key)->addChild($_key);
                         foreach ($v as $name => $value) {
                             $c->addChild($name, $value);
                         }
@@ -238,9 +238,9 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
     }
     /**
      *
-     * @param Zircote_Hal_Link $link
+     * @param Hal_Link $link
      */
-    protected function _addLinks(Zircote_Hal_Link $link)
+    protected function _addLinks(Hal_Link $link)
     {
         if($link->getRel() != 'self' && !is_numeric($link->getRel())){
             $this->_addLink($link);
@@ -248,10 +248,10 @@ class Zircote_Hal_Resource extends Zircote_Hal_AbstractHal
     }
     /**
      *
-     * @param Zircote_Hal_Link $link
-     * @return Zircote_Hal_Resource
+     * @param Hal_Link $link
+     * @return Hal_Resource
      */
-    protected function _addLink(Zircote_Hal_Link $link)
+    protected function _addLink(Hal_Link $link)
     {
         $this->setXMLAttributes($this->_xml->addChild('link'), $link);
         return $this;
