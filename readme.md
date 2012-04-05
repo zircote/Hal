@@ -13,10 +13,8 @@ $parent = new Hal_Resource('/dogs');
 $parent->setLink(new Hal_Link('/dogs?q={text}', 'search'));
 $dogs[1] =  new Hal_Resource('/dogs/1');
 $dogs[1]->setData(array('id' => '1', 'name' => 'tiber', 'color' => 'black'));
-$dogs[2] =  new Hal_Resource('/dogs/2');
-$dogs[2]->setData(array('id' => '2', 'name' => 'sally', 'color' => 'white'));
-$dogs[3] =  new Hal_Resource('/dogs/3');
-$dogs[3]->setData(array('id' => '3', 'name' => 'fido', 'color' => 'gray'));
+$dogs[2] =  new Hal_Resource('/dogs/2',array('id' => '2', 'name' => 'sally', 'color' => 'white'));
+$dogs[3] =  new Hal_Resource('/dogs/3',array('id' => '3', 'name' => 'fido', 'color' => 'gray'));
 /* Add the embedded resources */
 foreach ($dogs as $dog) {
     $parent->setEmbedded('dog', $dog);
