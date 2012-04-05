@@ -76,7 +76,7 @@ class Hal_Link extends Hal_AbstractHal
             ->setTitle($title)
             ->setHreflang($hreflang);
     }
-	/**
+    /**
      * @return string
      */
     public function getRel ()
@@ -84,7 +84,7 @@ class Hal_Link extends Hal_AbstractHal
         return $this->_rel;
     }
 
-	/**
+    /**
      * @return string
      */
     public function getHref ()
@@ -107,7 +107,7 @@ class Hal_Link extends Hal_AbstractHal
         return $this->_title;
     }
 
-	/**
+    /**
      * @return string
      */
     public function getHreflang ()
@@ -142,7 +142,7 @@ class Hal_Link extends Hal_AbstractHal
         $this->_name = $name;
         return $this;
     }
-	/**
+    /**
      * @param string $title
      * @return Hal_Link
      */
@@ -152,7 +152,7 @@ class Hal_Link extends Hal_AbstractHal
         return $this;
     }
 
-	/**
+    /**
      * @param string $hreflang
      * @return Hal_Link
      */

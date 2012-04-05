@@ -228,7 +228,6 @@ EOF;
         foreach ($dogs as $dog) {
             $parent->setEmbedded('dog', $dog);
         }
-        echo $parent->getXML()->asXML();
     }
 }
 

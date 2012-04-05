@@ -30,7 +30,6 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
-
 require_once 'Hal/AbstractHal.php';
 require_once 'Hal/Resource.php';
 require_once 'Hal/Link.php';
