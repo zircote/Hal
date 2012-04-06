@@ -1,9 +1,9 @@
 # Hal
- * http://stateless.co/hal_specification.html
- * http://blog.stateless.co/post/13296666138/json-linking-with-hal
- * http://www.mnot.net/blog/2011/11/25/linking_in_json
- * https://gist.github.com/2289546
- * https://groups.google.com/d/forum/hal-discuss
+ * [HAL Specification](http://stateless.co/hal_specification.html)
+ * [JSON Linking With HAL](http://blog.stateless.co/post/13296666138/json-linking-with-hal)
+ * [Linking In Json](http://www.mnot.net/blog/2011/11/25/linking_in_json)
+ * [Examples of HAL](https://gist.github.com/2289546)
+ * [HAL on Google Groups](https://groups.google.com/d/forum/hal-discuss)
 
 ```php
 <?php
