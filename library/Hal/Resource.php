@@ -62,13 +62,30 @@ class Hal_Resource extends Hal_AbstractHal
         return $this->_links;
     }
     /**
+     * Add a link to the resource.
+     *
+     * Per the JSON-HAL specification, a link relation can reference a 
+     * single link or an array of links. By default, two or more links with 
+     * the same relation will be treated as an array of links. The $singular
+     * flag will force links with the same relation to be overwritten.
      *
      * @param Hal_Link $link
      * @return Hal_Resource
      */
-    public function setLink(Hal_Link $link)
+    public function setLink(Hal_Link $link, $singular=false)
     {
-        $this->_links[$link->getRel()] = $link;
+        $rel = $link->getRel();
+
+        if (!isset($this->_links[$rel]) || $singular) {
+            $this->_links[$rel] = $link;
+        } else {
+            if (!is_array($this->_links[$rel])) {
+                $orig_link = $this->_links[$rel];
+                $this->_links[$rel] = array($orig_link);
+            }
+            $this->_links[$rel][] = $link;
+        }
+
         return $this;
     }
     /**
@@ -108,7 +125,7 @@ class Hal_Resource extends Hal_AbstractHal
     {
         $data = array();
         foreach ($this->_links as $rel => $link) {
-            $data['_links'][$rel] = $link->toArray();
+            $data['_links'][$rel] = $this->_recurseLinks($link);
         }
         foreach ($this->_data as $key => $value) {
             $data[$key] = $value;
@@ -132,6 +149,22 @@ class Hal_Resource extends Hal_AbstractHal
                 if($embed instanceof self){
                     $result[] = $embed->toArray();
                 }
+            }
+        }
+        return $result;
+    }
+    /**
+     * 
+     * @param mixed $links 
+     */
+    protected function _recurseLinks($links)
+    {
+        $result = array();
+        if(!is_array($links)) {
+            $result = $links->toArray();
+        } else {
+            foreach ($links as $link) {
+                $result[] = $link->toArray();
             }
         }
         return $result;
