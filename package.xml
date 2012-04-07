@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Hal</name>
+ <channel>pear.zircote.com</channel>
+ <summary>Hal - A PHP library for HAL generation</summary>
+ <description>HAL is a simple way of linking with JSON or XML.
+
+It provides a set of conventions for expressing hyperlinks to, and embeddedness
+of, related resources - the rest of a HAL document is just plain old JSON or XML.
+
+HAL is a bit like HTML for machines, in that it is designed to drive many
+different types of application. The difference is that HTML is intended for
+presenting a graphical hypertext interface to a &apos;human actor&apos;, whereas HAL is
+intended for presenting a machine hypertext interface to &apos;automated actors&apos;.
+
+This document contains a formalised specification of HAL. For a friendlier, more
+ pracitcal introduction to HAL you can read this article: JSON Linking with HAL
+
+HAL has two main components: Resources and Links.
+
+ * https://github.com/zircote/Hal
+ * http://groups.google.com/group/hal-discuss
+ * http://stateless.co/hal_specification.html
+ * http://blog.stateless.co/post/13296666138/json-linking-with-hal
+ * http://www.mnot.net/blog/2011/11/25/linking_in_json
+ * https://gist.github.com/2289546
+ </description>
+ <lead>
+  <name>Robert Allen</name>
+  <user>zircote</user>
+  <email>zircote@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2012-04-07</date>
+ <time>11:28:47</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
+ <notes>
+This is an alpha release, see readme.md for examples.
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <dir name="library">
+    <dir name="Hal">
+     <file baseinstalldir="/" name="AbstractHal.php" role="php">
+      <tasks:replace from="@name@" to="name" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file baseinstalldir="/" name="Link.php" role="php">
+      <tasks:replace from="@name@" to="name" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file baseinstalldir="/" name="Resource.php" role="php">
+      <tasks:replace from="@name@" to="name" type="package-info" />
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+    </dir> <!-- /library/Hal -->
+   </dir> <!-- /library -->
+   <dir name="tests">
+    <dir name="library">
+     <dir name="Hal">
+      <file baseinstalldir="/" name="LinkTest.php" role="test">
+       <tasks:replace from="@name@" to="name" type="package-info" />
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file baseinstalldir="/" name="ResourceTest.php" role="test">
+       <tasks:replace from="@name@" to="name" type="package-info" />
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+     </dir> <!-- /tests/library/Hal -->
+    </dir> <!-- /tests/library -->
+    <file baseinstalldir="/" name="bootstrap.php" role="test">
+     <tasks:replace from="@name@" to="name" type="package-info" />
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
+   </dir> <!-- /tests -->
+   <file baseinstalldir="/" name="CHANGELOG" role="doc" />
+   <file baseinstalldir="/" name="LICENSE-2.0.txt" role="doc" />
+   <file baseinstalldir="/" name="readme.md" role="doc" />
+   <file baseinstalldir="/" name="VERSION" role="doc" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.1</min>
+   </php>
+   <pearinstaller>
+    <min>1.7.0</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease>
+  <filelist>
+   <install as="Hal/AbstractHal.php" name="library/Hal/AbstractHal.php" />
+   <install as="Hal/Link.php" name="library/Hal/Link.php" />
+   <install as="Hal/Resource.php" name="library/Hal/Resource.php" />
+  </filelist>
+ </phprelease>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2012-04-07</date>
+   <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
+   <notes>
+This is an alpha release, see readme.md for examples.
+   </notes>
+  </release>
+ </changelog>
+</package>

@@ -1,0 +1,165 @@
+commit be63763f8e22ae75ce79289aee8631ea6d9a5b89
+Merge: 8dc2a54 872151c
+Author: Robert Allen <zircote@gmail.com>
+Date:   Fri Apr 6 16:35:24 2012 -0700
+
+    Merge pull request #1 from hradtke/links
+    
+    Allow multiple href's per link relation.
+
+commit 872151ced307914989b39e6a59743980098fa024
+Author: Herman J. Radtke III <hermanradtke@gmail.com>
+Date:   Fri Apr 6 15:25:45 2012 -0700
+
+    Allow multiple href's per link relation.
+
+commit 8dc2a542de66c7e770e00d321f4784cf26aa90e5
+Author: Robert Allen <zircote@gmail.com>
+Date:   Fri Apr 6 09:25:28 2012 -0500
+
+    Added link to hal spec repository
+
+commit 8816b87b42c8e84f427624694ca3b92a14c12fe2
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 21:57:24 2012 -0500
+
+    Updated Links and readme
+
+commit a518dbbbaa295454db577c4670f4b8b996743079
+Merge: 33e2a43 a66640f
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 13:30:59 2012 -0500
+
+    merged changes from @hradtke resolved conflicts
+    detabbed
+
+commit 33e2a43bd5761a3d9a52a39fb039b0880a21b127
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 12:44:25 2012 -0500
+
+    minors editing of readme for readability sake
+
+commit 926ae6fcb1f40ea91d02b96ee4547a4fff106fb2
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 12:41:38 2012 -0500
+
+    removed the ^Ms as line delimters -.-
+
+commit 8ac4bf6fb59d46796517b65943eba1067cb1e0bf
+Merge: a1e39fb 1eddd70
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 12:35:49 2012 -0500
+
+    Merge branch 'develop'
+
+commit a1e39fb0f022dfc38eaaff2e2959a855e10e8aa7
+Merge: 3fe4d10 fb3f375
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 12:34:25 2012 -0500
+
+    refactoring of namespace, and incorporated the changes made by @hradtke
+
+commit 1eddd701c79b3bf7929563a65b20b30aeb6624a4
+Merge: 3fe4d10 fb3f375
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 12:34:25 2012 -0500
+
+    Merge branch 'master' into develop
+
+commit fb3f375dc9313fc3d64b7183be71b9e114020800
+Merge: c9e301e bc59106
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 12:31:55 2012 -0500
+
+    refactoring of namespace, and incorporated the changes made by @hradtke
+
+commit 3fe4d1012fdc316a17d9c128cfcd5b65c70dbec0
+Merge: c9e301e bc59106
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 12:31:55 2012 -0500
+
+    Merge branch 'master' into develop
+
+commit bc59106e0af0ea14ce71d1c8aaef89b43aecf569
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 12:29:51 2012 -0500
+
+    refactoring of namespace, and incorporated the changes made by @hradtke
+
+commit c9e301e64c8c1faf820be60970cd53ad9ee121ed
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Apr 5 12:29:51 2012 -0500
+
+    refactoring of namespace, and incorporated the changes made by @hradtke
+
+commit a66640f469fe7ec3a625c708a434f12d40b6efa1
+Author: Herman J. Radtke III <hermanradtke@gmail.com>
+Date:   Wed Mar 28 17:29:50 2012 -0700
+
+    Fixed the Hal_Resource interface and fixed format of code.
+    
+    The Hal_Resource contstructor was asking for a rel tag and never used it. A
+    more common use case is to set the data in the constructor so the client does
+    not have to call the setData() method after the fact.
+
+commit 9ba56231b1eb2ea203eb4dd71c1cb726c5353bb3
+Author: Herman J. Radtke III <hermanradtke@gmail.com>
+Date:   Wed Mar 28 11:59:13 2012 -0700
+
+    Remove Zircote namespace and Zend Framework dependency.
+
+commit 5472967c41be0bf4b62e60726b71616713010a9f
+Author: Robert Allen <zircote@gmail.com>
+Date:   Fri Mar 9 17:55:21 2012 -0600
+
+    corrected bug with data entity general
+
+commit 652a6f764c7d6b58f18ca096fa572ba816ad72f1
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Mar 8 09:21:44 2012 -0600
+
+    added license information
+
+commit c99ae924e4037295a929de77f22416621cf521da
+Author: Robert Allen <zircote@gmail.com>
+Date:   Thu Mar 8 09:17:09 2012 -0600
+
+    added Apache 2.0 License
+
+commit 5338ce8c098309901a2844990926798273d933b2
+Author: Robert Allen <zircote@gmail.com>
+Date:   Fri Mar 2 17:52:10 2012 -0600
+
+    updated docs, added test for simple
+
+commit ee23c867614171c7823c430e52368775165416d6
+Author: Robert Allen <zircote@gmail.com>
+Date:   Fri Mar 2 16:01:45 2012 -0600
+
+    Added XML serialization support.
+
+commit 293eab5cc9e4036850179a385f9d8bc1e10dd40d
+Author: zircote <zircote@gmail.com>
+Date:   Wed Feb 29 01:16:38 2012 -0600
+
+    Updated docblox and added relevant comments as stated in the spec.
+    Refactored classes removed unnecasary Abstract.
+    Change-Id: I3427b012ba52504ec44539c7e8eca32c47b54543
+
+commit 204a37e0dae483e40ab0f207ecbaf2a02f159fa8
+Author: Robert Allen <zircote@gmail.com>
+Date:   Tue Feb 28 10:31:43 2012 -0600
+
+    added links
+
+commit a0b32a419b95f54a67a4d6d3058d195ed96318fa
+Author: Robert Allen <zircote@gmail.com>
+Date:   Tue Feb 28 10:21:58 2012 -0600
+
+    Added examples and links
+
+commit 01e9534cfd17271b02c2a7ed5945cd05875e597e
+Author: Robert Allen <zircote@gmail.com>
+Date:   Tue Feb 28 10:00:14 2012 -0600
+
+    initial commit
