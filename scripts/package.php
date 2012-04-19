@@ -1,6 +1,5 @@
 #!/usr/bin/env php
 <?php
-
 error_reporting(error_reporting() ^ E_DEPRECATED);
 if (version_compare(PHP_VERSION, '5.3.2') >= 0) {
     error_reporting(error_reporting() ^ E_DEPRECATED);
@@ -93,6 +92,7 @@ $package->setOptions(
         'ignore'                  => array(
             'build/*',
             'package.xml',
+            'composer.json',
             'build.xml',
             'scripts/*',
             '.git',
