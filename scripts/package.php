@@ -1,9 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-// Fix warinigs
-// pirum add target_dir Pirum-1.0.0.tgz
-// scp Skulk-0.1.5.tgz pear.zircote.com:/export/sites/pear.zircote.com/
 error_reporting(error_reporting() ^ E_DEPRECATED);
 if (version_compare(PHP_VERSION, '5.3.2') >= 0) {
     error_reporting(error_reporting() ^ E_DEPRECATED);
@@ -43,31 +40,32 @@ $release_version = $version;
 $release_state   = 'beta';
 $release_notes   = "This is an alpha release, see readme.md for examples.";
 
-$summary     = "Hal - A PHP library for HAL generation";
+$summary     = "A PHP library for HAL generation";
 
 $description =<<<EOF
 HAL is a simple way of linking with JSON or XML.
-
+<p/>
 It provides a set of conventions for expressing hyperlinks to, and embeddedness
 of, related resources - the rest of a HAL document is just plain old JSON or XML.
-
+<p/>
 HAL is a bit like HTML for machines, in that it is designed to drive many
 different types of application. The difference is that HTML is intended for
 presenting a graphical hypertext interface to a 'human actor', whereas HAL is
 intended for presenting a machine hypertext interface to 'automated actors'.
-
+<p/>
 This document contains a formalised specification of HAL. For a friendlier, more
  pracitcal introduction to HAL you can read this article: JSON Linking with HAL
-
+<p/>
 HAL has two main components: Resources and Links.
-
- * https://github.com/zircote/Hal
- * http://groups.google.com/group/hal-discuss
- * http://stateless.co/hal_specification.html
- * http://blog.stateless.co/post/13296666138/json-linking-with-hal
- * http://www.mnot.net/blog/2011/11/25/linking_in_json
- * https://gist.github.com/2289546
-
+<p/>
+<ul>
+<li>https://github.com/zircote/Hal</li>
+<li>http://groups.google.com/group/hal-discuss</li>
+<li>http://stateless.co/hal_specification.html</li>
+<li>http://blog.stateless.co/post/13296666138/json-linking-with-hal</li>
+<li>http://www.mnot.net/blog/2011/11/25/linking_in_json</li>
+<li>https://gist.github.com/2289546</li>
+</ul>
 EOF;
 
 $package = new PEAR_PackageFileManager2();
@@ -112,7 +110,7 @@ $package->setOptions(
 $package->setPackage('Hal');
 $package->setSummary($summary);
 $package->setDescription($description);
-$package->setChannel('pear.zircote.com');
+$package->setChannel('zircote.github.com/pear');
 $package->setPackageType('php');
 $package->setLicense(
     'Apache 2.0',

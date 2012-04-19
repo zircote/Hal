@@ -4,30 +4,31 @@
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Hal</name>
- <channel>pear.zircote.com</channel>
- <summary>Hal - A PHP library for HAL generation</summary>
+ <channel>zircote.github.com/pear</channel>
+ <summary>A PHP library for HAL generation</summary>
  <description>HAL is a simple way of linking with JSON or XML.
-
+&lt;p/&gt;
 It provides a set of conventions for expressing hyperlinks to, and embeddedness
 of, related resources - the rest of a HAL document is just plain old JSON or XML.
-
+&lt;p/&gt;
 HAL is a bit like HTML for machines, in that it is designed to drive many
 different types of application. The difference is that HTML is intended for
 presenting a graphical hypertext interface to a &apos;human actor&apos;, whereas HAL is
 intended for presenting a machine hypertext interface to &apos;automated actors&apos;.
-
+&lt;p/&gt;
 This document contains a formalised specification of HAL. For a friendlier, more
  pracitcal introduction to HAL you can read this article: JSON Linking with HAL
-
+&lt;p/&gt;
 HAL has two main components: Resources and Links.
-
- * https://github.com/zircote/Hal
- * http://groups.google.com/group/hal-discuss
- * http://stateless.co/hal_specification.html
- * http://blog.stateless.co/post/13296666138/json-linking-with-hal
- * http://www.mnot.net/blog/2011/11/25/linking_in_json
- * https://gist.github.com/2289546
- </description>
+&lt;p/&gt;
+&lt;ul&gt;
+&lt;li&gt;https://github.com/zircote/Hal&lt;/li&gt;
+&lt;li&gt;http://groups.google.com/group/hal-discuss&lt;/li&gt;
+&lt;li&gt;http://stateless.co/hal_specification.html&lt;/li&gt;
+&lt;li&gt;http://blog.stateless.co/post/13296666138/json-linking-with-hal&lt;/li&gt;
+&lt;li&gt;http://www.mnot.net/blog/2011/11/25/linking_in_json&lt;/li&gt;
+&lt;li&gt;https://gist.github.com/2289546&lt;/li&gt;
+&lt;/ul&gt;</description>
  <lead>
   <name>Robert Allen</name>
   <user>zircote</user>
@@ -35,7 +36,7 @@ HAL has two main components: Resources and Links.
   <active>yes</active>
  </lead>
  <date>2012-04-07</date>
- <time>11:28:47</time>
+ <time>13:27:51</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
