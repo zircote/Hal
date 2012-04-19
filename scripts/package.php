@@ -91,6 +91,7 @@ $package->setOptions(
         'ignore'                  => array(
             'build/*',
             'package.xml',
+            'composer.json',
             'build.xml',
             'scripts/*',
             '.git',
