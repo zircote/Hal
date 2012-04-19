@@ -1,6 +1,9 @@
 {
     "name": "zircote/Hal",
     "type": "library",
+    "version": "0.1.0",
+    "time" : "2012-04-01",
+    "license" : "Apache2",
     "description": "A PHP implementation of HAL http://stateless.co/hal_specification.html",
     "keywords": ["Hal", "json", "api", "HATEOAS"],
     "homepage": "https://github.com/zircote/Hal/",
