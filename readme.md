@@ -1,7 +1,7 @@
 # Hal
 
- * [HAL Specification](http://stateless.co/hal_specification.html)
- * [Hal Specification on Github](https://github.com/mikekelly/hal_specification)
+ * [HAL Specification](http://stateless.co/\Hal\specification.html)
+ * [Hal Specification on Github](https://github.com/mikekelly/\Hal\specification)
  * [JSON Linking With HAL](http://blog.stateless.co/post/13296666138/json-linking-with-hal)
  * [Linking In Json](http://www.mnot.net/blog/2011/11/25/linking_in_json)
  * [Examples of HAL](https://gist.github.com/2289546)
@@ -9,11 +9,13 @@
 
 ```php
 <?php
+use Hal\Resource,
+    Hal\Link;
 /* Create a new Resource Parent */
-$parent = new Hal_Resource('/dogs');
+$parent = new Resource('/dogs');
 /* Add any relevent links */
-$parent->setLink(new Hal_Link('/dogs?q={text}', 'search'));
-$dogs[1] =  new Hal_Resource('/dogs/1');
+$parent->setLink(new Link('/dogs?q={text}', 'search'));
+$dogs[1] =  new Resource('/dogs/1');
 $dogs[1]->setData(
     array(
         'id' => '1', 
@@ -21,14 +23,14 @@ $dogs[1]->setData(
         'color' => 'black'
     )
 );
-$dogs[2] =  new Hal_Resource(
+$dogs[2] =  new Resource(
     '/dogs/2',array(
         'id' => '2', 
         'name' => 'sally', 
         'color' => 'white'
     )
 );
-$dogs[3] =  new Hal_Resource(
+$dogs[3] =  new Resource(
     '/dogs/3',array(
         'id' => '3', 
         'name' => 'fido', 

@@ -1,7 +1,7 @@
 {
     "name": "zircote/Hal",
     "type": "library",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "time" : "2012-04-01",
     "license" : "Apache2",
     "description": "A PHP implementation of HAL http://stateless.co/hal_specification.html",
@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=5.2.4"
+        "php": ">=5.3.3"
     },
     "autoload": {
         "psr-0": {"Hal": "library"}

@@ -1,6 +1,14 @@
 <?php
 /**
  *
+ * @category Hal
+ * @package Hal
+ */
+namespace Hal;
+use SimpleXMLElement,
+    Hal\Link;
+/**
+ *
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * Copyright [2012] [Robert Allen]
  *
@@ -16,12 +24,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
+ * @category Hal
  * @package Hal
  *
  *
  */
-abstract class Hal_AbstractHal
+abstract class AbstractHal
 {
     /**
      *
@@ -30,10 +38,10 @@ abstract class Hal_AbstractHal
     protected $_xml;
     /**
      * @param SimpleXMLElement $xml
-     * @param Hal_Link $link
-     * @return Hal_AbstractHal
+     * @param Link $link
+     * @return AbstractHal
      */
-    public function setXMLAttributes(SimpleXMLElement $xml, Hal_Link $link)
+    public function setXMLAttributes(SimpleXMLElement $xml, Link $link)
     {
         $xml->addAttribute('href', $link->getHref());
         if($link->getRel() && $link->getRel() !== 'self'){

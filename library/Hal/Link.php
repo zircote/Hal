@@ -1,6 +1,14 @@
 <?php
 /**
  *
+ * @category Hal
+ * @package Hal
+ */
+namespace Hal;
+use SimpleXMLElement,
+    Hal\Resource;
+/**
+ *
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * Copyright [2012] [Robert Allen]
  *
@@ -18,7 +26,7 @@
  *
  * @package Hal
  */
-class Hal_Link extends Hal_AbstractHal
+class Link extends AbstractHal
 {
     /**
      * For labeling the destination of a link with a human-readable identifier.
@@ -116,7 +124,7 @@ class Hal_Link extends Hal_AbstractHal
     }
     /**
      * @param string $rel
-     * @return Hal_Link
+     * @return Link
      */
     public function setRel ($rel)
     {
@@ -125,7 +133,7 @@ class Hal_Link extends Hal_AbstractHal
     }
     /**
      * @param string $href
-     * @return Hal_Link
+     * @return Link
      */
     public function setHref ($href)
     {
@@ -135,7 +143,7 @@ class Hal_Link extends Hal_AbstractHal
     /**
      *
      * @param string $name
-     * @return Hal_Link
+     * @return Link
      */
     public function setName($name)
     {
@@ -144,7 +152,7 @@ class Hal_Link extends Hal_AbstractHal
     }
     /**
      * @param string $title
-     * @return Hal_Link
+     * @return Link
      */
     public function setTitle ($title)
     {
@@ -154,7 +162,7 @@ class Hal_Link extends Hal_AbstractHal
 
     /**
      * @param string $hreflang
-     * @return Hal_Link
+     * @return Link
      */
     public function setHreflang ($hreflang)
     {
@@ -173,9 +181,6 @@ class Hal_Link extends Hal_AbstractHal
         }
         if($this->getTitle()){
             $link['title'] = $this->getTitle();
-        }
-        if($this->getRel()){
-//             $link['rel'] = $this->getRel();
         }
         if($this->getName()){
             $link['name'] = $this->getName();

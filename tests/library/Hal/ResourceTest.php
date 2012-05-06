@@ -1,5 +1,13 @@
 <?php
 /**
+ * @category Hal
+ * @package Hal
+ * @subpackage Hal\Tests
+ */
+namespace Hal\Tests;
+use Hal\Resource,
+    Hal\Link;
+/**
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * Copyright [2012] [Robert Allen]
  *
@@ -15,14 +23,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Hal_Link test case.
+ * Link test case.
  */
-class Hal_ResourceTest extends PHPUnit_Framework_TestCase
+class ResourceTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetSingleLink()
     {
-        $parent = new Hal_Resource('/dogs');
-        $parent->setLink(new Hal_Link('/dogs?q={text}', 'search'));
+        $parent = new Resource('/dogs');
+        $parent->setLink(new Link('/dogs?q={text}', 'search'));
 
         $actual = json_decode($parent);
 
@@ -45,9 +53,9 @@ EOF;
 
     public function testSetLinkMultiple()
     {
-        $parent = new Hal_Resource('/dogs');
-        $parent->setLink(new Hal_Link('/dogs?q={text}', 'search'));
-        $parent->setLink(new Hal_Link('/dogs?q={text}&limit={limit}', 'search'));
+        $parent = new Resource('/dogs');
+        $parent->setLink(new Link('/dogs?q={text}', 'search'));
+        $parent->setLink(new Link('/dogs?q={text}&limit={limit}', 'search'));
 
         $actual = json_decode($parent);
 
@@ -72,9 +80,9 @@ EOF;
 
     public function testSetLinkMultipleSingular()
     {
-        $parent = new Hal_Resource('/dogs');
-        $parent->setLink(new Hal_Link('/dogs?q={text}', 'search'));
-        $parent->setLink(new Hal_Link('/dogs?q={text}&limit={limit}', 'search'), true);
+        $parent = new Resource('/dogs');
+        $parent->setLink(new Link('/dogs?q={text}', 'search'));
+        $parent->setLink(new Link('/dogs?q={text}&limit={limit}', 'search'), true);
 
         $actual = json_decode($parent);
 

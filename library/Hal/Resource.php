@@ -1,5 +1,14 @@
 <?php
 /**
+ *
+ * @category Hal
+ * @package Hal
+ */
+namespace Hal;
+use Hal\Link,
+    Hal\AbstractHal,
+    SimpleXMLElement;
+/**
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * Copyright [2012] [Robert Allen]
  *
@@ -15,13 +24,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * @category Hal
  * @package Hal
  *
  */
-class Hal_Resource extends Hal_AbstractHal
+class Resource extends AbstractHal
 {
     /**
-     * Internal storage of `Hal_Link` objects
+     * Internal storage of `Link` objects
      * @var array
      */
     protected $_links = array();
@@ -31,7 +41,7 @@ class Hal_Resource extends Hal_AbstractHal
      */
     protected $_data = array();
     /**
-     * Internal storage of `Hal_Resource` objects
+     * Internal storage of `Resource` objects
      * @var array
      */
     protected $_embedded = array();
@@ -43,12 +53,12 @@ class Hal_Resource extends Hal_AbstractHal
     public function __construct($href, array $data = array(), $title = null, $name = null, $hreflang = null)
     {
         $this->setLink(
-            new Hal_Link($href, 'self', $title, $name, $hreflang)
+            new Link($href, 'self', $title, $name, $hreflang)
         );
         $this->setData($data);
     }
     /**
-     * @return Hal_Link
+     * @return Link
      */
     public function getSelf()
     {
@@ -64,15 +74,15 @@ class Hal_Resource extends Hal_AbstractHal
     /**
      * Add a link to the resource.
      *
-     * Per the JSON-HAL specification, a link relation can reference a 
-     * single link or an array of links. By default, two or more links with 
+     * Per the JSON-HAL specification, a link relation can reference a
+     * single link or an array of links. By default, two or more links with
      * the same relation will be treated as an array of links. The $singular
      * flag will force links with the same relation to be overwritten.
      *
-     * @param Hal_Link $link
-     * @return Hal_Resource
+     * @param Link $link
+     * @return Resource
      */
-    public function setLink(Hal_Link $link, $singular=false)
+    public function setLink(Link $link, $singular=false)
     {
         $rel = $link->getRel();
 
@@ -91,7 +101,7 @@ class Hal_Resource extends Hal_AbstractHal
     /**
      *
      * @param array $data
-     * @return Hal_Resource
+     * @return Resource
      */
     public function setData($rel, $data = null)
     {
@@ -106,10 +116,10 @@ class Hal_Resource extends Hal_AbstractHal
     }
     /**
      *
-     * @param Hal_Resource $resource
-     * @return Hal_Resource
+     * @param Resource $resource
+     * @return Resource
      */
-    public function setEmbedded($rel,Hal_Resource $resource, $singular = false)
+    public function setEmbedded($rel,Resource $resource, $singular = false)
     {
         if($singular){
             $this->_embedded[$rel] = $resource;
@@ -154,8 +164,8 @@ class Hal_Resource extends Hal_AbstractHal
         return $result;
     }
     /**
-     * 
-     * @param mixed $links 
+     *
+     * @param mixed $links
      */
     protected function _recurseLinks($links)
     {
@@ -210,9 +220,9 @@ class Hal_Resource extends Hal_AbstractHal
      */
     protected function _getEmbedded($embedded, $_rel = null)
     {
-        /* @var $embed Hal_Resource */
+        /* @var $embed Resource */
         foreach ($embedded as $rel => $embed) {
-            if($embed instanceof Hal_Resource){
+            if($embed instanceof Resource){
                 $rel = is_numeric($rel) ? $_rel : $rel;
                 $this->_getEmbRes($embed)->addAttribute('rel', $rel);
             } else {
@@ -220,7 +230,7 @@ class Hal_Resource extends Hal_AbstractHal
             }
         }
     }
-    protected function _getEmbRes(Hal_Resource $embed)
+    protected function _getEmbRes(Resource $embed)
     {
         $resource = $this->_xml->addChild('resource');
         return $embed->getXML($resource);
@@ -228,7 +238,7 @@ class Hal_Resource extends Hal_AbstractHal
     /**
      *
      * @param SimpleXMLElement $xml
-     * @return Hal_Resource
+     * @return Resource
      */
     public function setXML(SimpleXMLElement $xml)
     {
@@ -271,9 +281,9 @@ class Hal_Resource extends Hal_AbstractHal
     }
     /**
      *
-     * @param Hal_Link $link
+     * @param Link $link
      */
-    protected function _addLinks(Hal_Link $link)
+    protected function _addLinks(Link $link)
     {
         if($link->getRel() != 'self' && !is_numeric($link->getRel())){
             $this->_addLink($link);
@@ -281,10 +291,10 @@ class Hal_Resource extends Hal_AbstractHal
     }
     /**
      *
-     * @param Hal_Link $link
-     * @return Hal_Resource
+     * @param Link $link
+     * @return Resource
      */
-    protected function _addLink(Hal_Link $link)
+    protected function _addLink(Link $link)
     {
         $this->setXMLAttributes($this->_xml->addChild('link'), $link);
         return $this;

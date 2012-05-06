@@ -178,7 +178,7 @@ foreach ($files as $file) {
 }
 
 
-$package->setPhpDep('5.2.1');
+$package->setPhpDep('5.3.3');
 
 $package->setPearInstallerDep('1.7.0');
 $package->generateContents();
