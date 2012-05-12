@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Hal by zircote</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Hal</h1>
+        <h2>A PHP implementation of HAL http://stateless.co/hal_specification.html</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/zircote/Hal/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/zircote/Hal/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/zircote/Hal" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>Hal</h1>
+
+<ul>
+<li><a href="http://stateless.co/Halspecification.html">HAL Specification</a></li>
+<li><a href="https://github.com/mikekelly/Halspecification">Hal Specification on Github</a></li>
+<li><a href="http://blog.stateless.co/post/13296666138/json-linking-with-hal">JSON Linking With HAL</a></li>
+<li><a href="http://www.mnot.net/blog/2011/11/25/linking_in_json">Linking In Json</a></li>
+<li><a href="https://gist.github.com/2289546">Examples of HAL</a></li>
+<li><a href="https://groups.google.com/d/forum/hal-discuss">HAL on Google Groups</a></li>
+</ul><div class="highlight">
+<pre><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Hal\Resource</span><span class="p">,</span>
+    <span class="nx">Hal\Link</span><span class="p">;</span>
+<span class="cm">/* Create a new Resource Parent */</span>
+<span class="nv">$parent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Resource</span><span class="p">(</span><span class="s1">'/dogs'</span><span class="p">);</span>
+<span class="cm">/* Add any relevent links */</span>
+<span class="nv">$parent</span><span class="o">-&gt;</span><span class="na">setLink</span><span class="p">(</span><span class="k">new</span> <span class="nx">Link</span><span class="p">(</span><span class="s1">'/dogs?q={text}'</span><span class="p">,</span> <span class="s1">'search'</span><span class="p">));</span>
+<span class="nv">$dogs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="k">new</span> <span class="nx">Resource</span><span class="p">(</span><span class="s1">'/dogs/1'</span><span class="p">);</span>
+<span class="nv">$dogs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">setData</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'1'</span><span class="p">,</span> 
+        <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'tiber'</span><span class="p">,</span> 
+        <span class="s1">'color'</span> <span class="o">=&gt;</span> <span class="s1">'black'</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$dogs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="k">new</span> <span class="nx">Resource</span><span class="p">(</span>
+    <span class="s1">'/dogs/2'</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'2'</span><span class="p">,</span> 
+        <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'sally'</span><span class="p">,</span> 
+        <span class="s1">'color'</span> <span class="o">=&gt;</span> <span class="s1">'white'</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="nv">$dogs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span>  <span class="k">new</span> <span class="nx">Resource</span><span class="p">(</span>
+    <span class="s1">'/dogs/3'</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="s1">'3'</span><span class="p">,</span> 
+        <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'fido'</span><span class="p">,</span> 
+        <span class="s1">'color'</span> <span class="o">=&gt;</span> <span class="s1">'gray'</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+<span class="cm">/* Add the embedded resources */</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$dogs</span> <span class="k">as</span> <span class="nv">$dog</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$parent</span><span class="o">-&gt;</span><span class="na">setEmbedded</span><span class="p">(</span><span class="s1">'dog'</span><span class="p">,</span> <span class="nv">$dog</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">echo</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$parent</span><span class="p">;</span>
+</pre>
+</div>
+
+
+<h3>Result:</h3>
+
+<div class="highlight">
+<pre><span class="p">{</span>
+  <span class="s2">"_links"</span><span class="o">:</span><span class="p">{</span>
+        <span class="s2">"self"</span><span class="o">:</span><span class="p">{</span>
+            <span class="s2">"href"</span><span class="o">:</span><span class="s2">"\/dogs"</span>
+        <span class="p">},</span>
+        <span class="s2">"search"</span><span class="o">:</span><span class="p">{</span>
+            <span class="s2">"href"</span><span class="o">:</span><span class="s2">"\/dogs?q={text}"</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">"_embedded"</span><span class="o">:</span><span class="p">{</span>
+        <span class="s2">"dog"</span><span class="o">:</span><span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"_links"</span><span class="o">:</span><span class="p">{</span>
+                    <span class="s2">"self"</span><span class="o">:</span><span class="p">{</span>
+                        <span class="s2">"href"</span><span class="o">:</span><span class="s2">"\/dogs\/1"</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="s2">"id"</span><span class="o">:</span><span class="s2">"1"</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="o">:</span><span class="s2">"tiber"</span><span class="p">,</span>
+                <span class="s2">"color"</span><span class="o">:</span><span class="s2">"black"</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">"_links"</span><span class="o">:</span><span class="p">{</span>
+                    <span class="s2">"self"</span><span class="o">:</span><span class="p">{</span>
+                        <span class="s2">"href"</span><span class="o">:</span><span class="s2">"\/dogs\/2"</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="s2">"id"</span><span class="o">:</span><span class="s2">"2"</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="o">:</span><span class="s2">"sally"</span><span class="p">,</span>
+                <span class="s2">"color"</span><span class="o">:</span><span class="s2">"white"</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">"_links"</span><span class="o">:</span><span class="p">{</span>
+                    <span class="s2">"self"</span><span class="o">:</span><span class="p">{</span>
+                        <span class="s2">"href"</span><span class="o">:</span><span class="s2">"\/dogs\/3"</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="s2">"id"</span><span class="o">:</span><span class="s2">"3"</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="o">:</span><span class="s2">"fido"</span><span class="p">,</span>
+                <span class="s2">"color"</span><span class="o">:</span><span class="s2">"gray"</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+
+
+<h2>Generating XML output</h2>
+
+<div class="highlight">
+<pre><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$parent</span><span class="o">-&gt;</span><span class="na">getXML</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">asXML</span><span class="p">();</span>
+</pre>
+</div>
+
+
+<h3>Result:</h3>
+
+<div class="highlight">
+<pre><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;resource</span> <span class="na">href=</span><span class="s">"/dogs"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"/dogs?q={text}"</span> <span class="na">rel=</span><span class="s">"search"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;resource</span> <span class="na">href=</span><span class="s">"/dogs/1"</span> <span class="na">rel=</span><span class="s">"dog"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;id&gt;</span>1<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;name&gt;</span>tiber<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;color&gt;</span>black<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;/resource&gt;</span>
+    <span class="nt">&lt;resource</span> <span class="na">href=</span><span class="s">"/dogs/2"</span> <span class="na">rel=</span><span class="s">"dog"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;id&gt;</span>2<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;name&gt;</span>sally<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;color&gt;</span>white<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;/resource&gt;</span>
+    <span class="nt">&lt;resource</span> <span class="na">href=</span><span class="s">"/dogs/3"</span> <span class="na">rel=</span><span class="s">"dog"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;id&gt;</span>3<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;name&gt;</span>fido<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;color&gt;</span>gray<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;/resource&gt;</span>
+<span class="nt">&lt;/resource&gt;</span>
+</pre>
+</div>
+
+      </section>
+    </div>
+
+    
+  </body>
+</html>
