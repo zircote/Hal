@@ -5,9 +5,9 @@
  * @package Hal
  */
 namespace Hal;
-use Hal\Link,
-    Hal\AbstractHal,
-    SimpleXMLElement;
+use Hal\Link;
+use Hal\AbstractHal;
+use SimpleXMLElement;
 /**
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * Copyright [2012] [Robert Allen]

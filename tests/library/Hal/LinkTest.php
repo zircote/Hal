@@ -5,8 +5,8 @@
  * @subpackage Hal\Tests
  */
 namespace Hal\Tests;
-use Hal\Resource,
-    Hal\Link;
+use Hal\Resource;
+use Hal\Link;
 
 /**
  * @license http://www.apache.org/licenses/LICENSE-2.0

@@ -5,8 +5,8 @@
  * @package Hal
  */
 namespace Hal;
-use SimpleXMLElement,
-    Hal\Resource;
+use SimpleXMLElement;
+use Hal\Resource;
 /**
  *
  * @license http://www.apache.org/licenses/LICENSE-2.0
@@ -189,14 +189,5 @@ class Link extends AbstractHal
             $link['hreflang'] = $this->getHreflang();
         }
         return $link;
-    }
-    /**
-     * @return SimpleXMLElement
-     */
-    public function addLink(SimpleXMLElement $xml)
-    {
-        $this->_xml = new SimpleXMLElement('<link/>');
-        $this->setXMLAttributes($this);
-        return $this->_xml;
     }
 }
