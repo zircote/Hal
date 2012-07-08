@@ -1,6 +1,5 @@
 # Hal
 
-[![Build Status](https://secure.travis-ci.org/zircote/Hal.png)](http://travis-ci.org/zircote/Hal)
 
  * [HAL Specification](http://stateless.co/\Hal\specification.html)
  * [Hal Specification on Github](https://github.com/mikekelly/\Hal\specification)
