@@ -98,6 +98,23 @@ class Resource extends AbstractHal
 
         return $this;
     }
+
+    /**
+     * Convenience function to set multiple links at once
+     * 
+     * @see Resource::setLink()
+     * @param array   $links    Array of Link objects
+     * @param boolean $singular
+     */
+    public function setLinks(array $links, $singular = false)
+    {
+        foreach ($links as $link) {
+            $this->setLink($link, $singular);
+        }
+
+        return $this;
+    }
+
     /**
      *
      * @param array $data
