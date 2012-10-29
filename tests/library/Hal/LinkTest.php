@@ -405,5 +405,82 @@ EOF;
             json_decode($fixture), json_decode((string)$parent)
         );
     }
+
+    public function testTemplatedLink()
+    {
+        $fixture = <<<'EOF'
+{
+    "_links":{
+        "self":{
+            "href":"/dogs"
+        },
+        "search":{
+            "href":"/dogs?q={text}",
+            "templated": true
+        }
+    }, "_embedded":{
+        "dog":[
+            {
+                "_links":{
+                    "self":{
+                        "href":"/dogs\/1"
+                    }
+                },
+                "id":"1",
+                "name":"tiber",
+                "color":"black"
+            },
+            {
+                "_links":{
+                    "self":{
+                        "href":"/dogs\/2"
+                    }
+                },
+                "id":"2",
+                "name":"sally",
+                "color":"white"
+            },
+            {
+                "_links":{
+                    "self":{
+                        "href":"/dogs\/3"
+                    }
+                },
+                "id":"3",
+                "name":"fido",
+                "color":"gray"
+            }
+        ]
+    }
+}
+EOF;
+
+        $parent = new Resource('/dogs');
+        /* Add any relevent links */
+        $parent->setLink(new Link('/dogs?q={text}', 'search', null, null, null, true));
+        $dogs[1] = new Resource('/dogs/1');
+        $dogs[1]->setData(
+            array('id' => '1', 'name' => 'tiber', 'color' => 'black')
+        );
+        $dogs[2] = new Resource('/dogs/2', array(
+                                                'id'    => '2',
+                                                'name'  => 'sally',
+                                                'color' => 'white'
+                                           ));
+        $dogs[3] = new Resource('/dogs/3', array(
+                                                'id'    => '3',
+                                                'name'  => 'fido',
+                                                'color' => 'gray'
+                                           ));
+        /* Add the embedded resources */
+        foreach ($dogs as $dog) {
+            $parent->setEmbedded('dog', $dog);
+        }
+        
+        $this->assertEquals(
+            json_decode($fixture), json_decode((string)$parent)
+        );
+
+    }
 }
 

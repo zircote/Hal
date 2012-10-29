@@ -68,6 +68,14 @@ class Link extends AbstractHal
      * @var string
      */
     protected $_hreflang;
+
+    /**
+     * Whether this link is "templated"
+     * @var boolean
+     * @link https://tools.ietf.org/html/rfc6570
+     */
+    protected $_templated;
+
     /**
      *
      * @param string $href
@@ -75,14 +83,16 @@ class Link extends AbstractHal
      * @param string $title
      * @param string $name
      * @param string $hreflang
+     * @param boolean $templated
      */
-    public function __construct($href, $rel = 'self', $title = null, $name = null, $hreflang = null)
+    public function __construct($href, $rel = 'self', $title = null, $name = null, $hreflang = null, $templated = false)
     {
         $this->setHref($href)
             ->setRel($rel)
             ->setName($name)
             ->setTitle($title)
-            ->setHreflang($hreflang);
+            ->setHreflang($hreflang)
+            ->setTemplated($templated);
     }
     /**
      * @return string
@@ -122,6 +132,15 @@ class Link extends AbstractHal
     {
         return $this->_hreflang;
     }
+
+    /**
+     * @return boolean
+     */
+    public function getTemplated()
+    {
+        return $this->_templated;
+    }
+
     /**
      * @param string $rel
      * @return Link
@@ -169,6 +188,17 @@ class Link extends AbstractHal
         $this->_hreflang = $hreflang;
         return $this;
     }
+
+    /**
+     * @param boolean $templated
+     * @return Link
+     */
+    public function setTemplated($templated)
+    {
+        $this->_templated = $templated;
+        return $this;
+    }
+
     /**
      *
      * @return array
@@ -187,6 +217,9 @@ class Link extends AbstractHal
         }
         if($this->getHreflang()){
             $link['hreflang'] = $this->getHreflang();
+        }
+        if ($this->getTemplated()) {
+            $link['templated'] = $this->getTemplated();
         }
         return $link;
     }
