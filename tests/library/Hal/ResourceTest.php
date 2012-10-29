@@ -160,4 +160,34 @@ EOF;
         $expected = json_decode($JSON);
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * This tests adding an empty resource
+     */
+    public function testEmptyResource()
+    {
+        $fixture = <<<'EOF'
+{
+    "_links":{
+        "self":{
+            "href":"/dogs"
+        },
+        "search":{
+            "href":"/dogs?q={text}"
+        }
+    }, "_embedded":{
+        "dog":[]
+    }
+}
+EOF;
+
+        $parent = new Resource('/dogs');
+        $parent->setLink(new Link('/dogs?q={text}', 'search'));
+        
+        $parent->setEmbedded('dog', null);
+        
+        $this->assertEquals(
+            json_decode($fixture), json_decode((string)$parent)
+        );
+    }
 }

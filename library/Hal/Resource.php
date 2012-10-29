@@ -136,7 +136,7 @@ class Resource extends AbstractHal
      * @param Resource $resource
      * @return Resource
      */
-    public function setEmbedded($rel,Resource $resource, $singular = false)
+    public function setEmbedded($rel,Resource $resource = null, $singular = false)
     {
         if($singular){
             $this->_embedded[$rel] = $resource;
