@@ -110,7 +110,7 @@ $package->setOptions(
 $package->setPackage('Hal');
 $package->setSummary($summary);
 $package->setDescription($description);
-$package->setChannel('zircote.github.com/pear');
+$package->setChannel('zircote.com/pear');
 $package->setPackageType('php');
 $package->setLicense(
     'Apache 2.0',
