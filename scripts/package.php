@@ -43,28 +43,23 @@ $summary     = "A PHP library for HAL generation";
 
 $description =<<<EOF
 HAL is a simple way of linking with JSON or XML.
-<p/>
-It provides a set of conventions for expressing hyperlinks to, and embeddedness
-of, related resources - the rest of a HAL document is just plain old JSON or XML.
-<p/>
-HAL is a bit like HTML for machines, in that it is designed to drive many
-different types of application. The difference is that HTML is intended for
-presenting a graphical hypertext interface to a 'human actor', whereas HAL is
-intended for presenting a machine hypertext interface to 'automated actors'.
-<p/>
-This document contains a formalised specification of HAL. For a friendlier, more
- pracitcal introduction to HAL you can read this article: JSON Linking with HAL
-<p/>
+
+It provides a set of conventions for expressing hyperlinks to, and embeddedness of, related resources - the rest of a HAL document is just plain old JSON or XML.
+
+HAL is a bit like HTML for machines, in that it is designed to drive many different types of application. The difference is that HTML is intended for presenting a graphical hypertext interface to a 'human actor', whereas HAL is intended for presenting a machine hypertext interface to 'automated actors'.
+
+This document contains a formalised specification of HAL. For a friendlier, more pracitcal introduction to HAL you can read this article: JSON Linking with HAL
+
 HAL has two main components: Resources and Links.
-<p/>
-<ul>
-<li>https://github.com/zircote/Hal</li>
-<li>http://groups.google.com/group/hal-discuss</li>
-<li>http://stateless.co/hal_specification.html</li>
-<li>http://blog.stateless.co/post/13296666138/json-linking-with-hal</li>
-<li>http://www.mnot.net/blog/2011/11/25/linking_in_json</li>
-<li>https://gist.github.com/2289546</li>
-</ul>
+
+ - https://github.com/zircote/Hal
+ - http://groups.google.com/group/hal-discuss
+ - http://stateless.co/hal_specification.html
+ - http://blog.stateless.co/post/13296666138/json-linking-with-hal
+ - http://www.mnot.net/blog/2011/11/25/linking_in_json
+ - https://gist.github.com/2289546
+
+
 EOF;
 
 $package = new PEAR_PackageFileManager2();
