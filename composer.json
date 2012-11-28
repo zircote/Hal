@@ -19,7 +19,8 @@
             "homepage":"http://hermanradtke.com"
         },
         {
-            "name":"Baldur Rensch"
+            "name":"Baldur Rensch",
+            "email": "brensch@gmail.com"
         }
     ],
     "require":{
