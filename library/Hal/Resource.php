@@ -77,19 +77,22 @@ class Resource extends AbstractHal
      * Per the JSON-HAL specification, a link relation can reference a
      * single link or an array of links. By default, two or more links with
      * the same relation will be treated as an array of links. The $singular
-     * flag will force links with the same relation to be overwritten.
+     * flag will force links with the same relation to be overwritten. The
+     * $plural flag will force links with only one relation to be treated
+     * as an array of links. The $plural flag has no effect if $singular
+     * is set to true.
      *
      * @param Link $link
      * @return Resource
      */
-    public function setLink(Link $link, $singular=false)
+    public function setLink(Link $link, $singular=false, $plural=false)
     {
         $rel = $link->getRel();
 
-        if (!isset($this->_links[$rel]) || $singular) {
+        if ($singular || (!isset($this->_links[$rel]) && !$plural)) {
             $this->_links[$rel] = $link;
         } else {
-            if (!is_array($this->_links[$rel])) {
+            if (isset($this->_links[$rel]) && !is_array($this->_links[$rel])) {
                 $orig_link = $this->_links[$rel];
                 $this->_links[$rel] = array($orig_link);
             }
@@ -106,10 +109,10 @@ class Resource extends AbstractHal
      * @param array   $links    Array of Link objects
      * @param boolean $singular
      */
-    public function setLinks(array $links, $singular = false)
+    public function setLinks(array $links, $singular = false, $plural = false)
     {
         foreach ($links as $link) {
-            $this->setLink($link, $singular);
+            $this->setLink($link, $singular, $plural);
         }
 
         return $this;

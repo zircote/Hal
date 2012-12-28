@@ -51,6 +51,32 @@ EOF;
         $this->assertEquals($expected, $actual);
     }
 
+    public function testSetSingleLinkPlural()
+    {
+        $parent = new Resource('/dogs');
+        $parent->setLink(new Link('/dogs?q={text}', 'search'), false, true);
+
+        $actual = json_decode($parent);
+
+        $JSON = <<<EOF
+{
+   "_links":{
+      "self":{
+         "href":"\/dogs"
+      },
+      "search": [
+         {
+            "href":"\/dogs?q={text}"
+         }
+      ]
+   }
+}
+EOF;
+
+        $expected = json_decode($JSON);
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testSetLinkMultiple()
     {
         $parent = new Resource('/dogs');
@@ -103,6 +129,58 @@ EOF;
         $this->assertEquals($expected, $actual);
     }
 
+    public function testSetLinkMultipleSingularPlural()
+    {
+        $parent = new Resource('/dogs');
+        $parent->setLink(new Link('/dogs?q={text}', 'search'));
+        $parent->setLink(new Link('/dogs?q={text}&limit={limit}', 'search'), true, true);
+
+        $actual = json_decode($parent);
+
+        $JSON = <<<EOF
+{
+   "_links":{
+      "self":{
+         "href":"\/dogs"
+      },
+      "search":{
+         "href":"\/dogs?q={text}&limit={limit}"
+      }
+   }
+}
+EOF;
+
+        $expected = json_decode($JSON);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testSetLinkMultiplePlural()
+    {
+        $parent = new Resource('/dogs');
+        $parent->setLink(new Link('/dogs?q={text}', 'search'), false, true);
+        $parent->setLink(new Link('/dogs?q={text}&limit={limit}', 'search'), false, true);
+
+        $actual = json_decode($parent);
+
+        $JSON = <<<EOF
+{
+   "_links":{
+      "self":{
+         "href":"\/dogs"
+      },
+      "search":[{
+         "href":"\/dogs?q={text}"
+      },{
+         "href":"\/dogs?q={text}&limit={limit}"
+      }]
+   }
+}
+EOF;
+
+        $expected = json_decode($JSON);
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testSetLinksMultiple()
     {
         $parent = new Resource('/dogs');
@@ -133,7 +211,7 @@ EOF;
         $this->assertEquals($expected, $actual);
     }
 
-     public function testSetLinksMultipleSingluar()
+    public function testSetLinksMultipleSingluar()
     {
         $parent = new Resource('/dogs');
         $links = array(
@@ -153,6 +231,68 @@ EOF;
       "search":{
          "href":"\/dogs?q={text}&limit={limit}"
       }
+   }
+}
+EOF;
+
+        $expected = json_decode($JSON);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testSetLinksMultipleSingluarPlural()
+    {
+        $parent = new Resource('/dogs');
+        $links = array(
+          new Link('/dogs?q={text}', 'search'),
+          new Link('/dogs?q={text}&limit={limit}', 'search')
+        );
+        $parent->setLinks($links, true, true);
+
+        $actual = json_decode($parent);
+
+        $JSON = <<<EOF
+{
+   "_links":{
+      "self":{
+         "href":"\/dogs"
+      },
+      "search":{
+         "href":"\/dogs?q={text}&limit={limit}"
+      }
+   }
+}
+EOF;
+
+        $expected = json_decode($JSON);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testSetLinksMultiplePlural()
+    {
+        $parent = new Resource('/dogs');
+        $links = array(
+          new Link('/dogs?q={text}', 'search'),
+          new Link('/dogs?q={text}&limit={limit}', 'search'),
+          new Link('/dogs?page=2', 'next')
+        );
+        $parent->setLinks($links, false, true);
+
+        $actual = json_decode($parent);
+
+        $JSON = <<<EOF
+{
+   "_links":{
+      "self":{
+         "href":"\/dogs"
+      },
+      "search":[{
+         "href":"\/dogs?q={text}"
+      },{
+         "href":"\/dogs?q={text}&limit={limit}"
+      }],
+      "next":[{
+         "href":"\/dogs?page=2"
+      }]
    }
 }
 EOF;
