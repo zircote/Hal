@@ -1,8 +1,8 @@
 # Hal
 [![Build Status](https://secure.travis-ci.org/zircote/Hal.png)](http://travis-ci.org/zircote/Hal)
 
- * [HAL Specification](http://stateless.co/\Hal\specification.html)
- * [Hal Specification on Github](https://github.com/mikekelly/\Hal\specification)
+ * [HAL Specification](http://stateless.co/hal_specification.html)
+ * [Hal Specification on Github](https://github.com/mikekelly/hal_specification)
  * [JSON Linking With HAL](http://blog.stateless.co/post/13296666138/json-linking-with-hal)
  * [Linking In Json](http://www.mnot.net/blog/2011/11/25/linking_in_json)
  * [Examples of HAL](https://gist.github.com/2289546)
