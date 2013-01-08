@@ -323,11 +323,53 @@ EOF;
 
         $parent = new Resource('/dogs');
         $parent->setLink(new Link('/dogs?q={text}', 'search'));
-        
+
         $parent->setEmbedded('dog', null);
-        
+
         $this->assertEquals(
             json_decode($fixture), json_decode((string)$parent)
+        );
+    }
+
+    /**
+     * This tests adding a resource with no self link
+     */
+    public function testEmptySelfLink()
+    {
+        $fixture = <<<'EOF'
+{
+    "data": "value"
+}
+EOF;
+
+        $parent = new Resource('', array('data' => 'value'));
+
+        $this->assertEquals(
+            json_decode($fixture), json_decode((string) $parent)
+        );
+    }
+
+    /**
+     * This tests adding a resource with no self link
+     */
+    public function testEmptySelfLinkWithOthers()
+    {
+        $fixture = <<<'EOF'
+{
+    "_links":{
+        "search":{
+            "href":"/dogs?q={text}"
+        }
+    },
+    "data": "value"
+}
+EOF;
+
+        $parent = new Resource('', array('data' => 'value'));
+        $parent->setLink(new Link('/dogs?q={text}', 'search'));
+
+        $this->assertEquals(
+            json_decode($fixture), json_decode((string) $parent)
         );
     }
 }

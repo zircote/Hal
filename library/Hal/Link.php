@@ -205,7 +205,12 @@ class Link extends AbstractHal
      */
     public function toArray()
     {
-        $link = array('href' => $this->getHref());
+        $href = $this->getHref();
+        if (empty($href)) {
+            return array();
+        }
+
+        $link = array('href' => $href);
         if($this->getTitle()){
             $link['title'] = $this->getTitle();
         }
