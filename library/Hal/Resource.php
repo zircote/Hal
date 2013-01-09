@@ -104,7 +104,7 @@ class Resource extends AbstractHal
 
     /**
      * Convenience function to set multiple links at once
-     * 
+     *
      * @see Resource::setLink()
      * @param array   $links    Array of Link objects
      * @param boolean $singular
@@ -155,7 +155,11 @@ class Resource extends AbstractHal
     {
         $data = array();
         foreach ($this->_links as $rel => $link) {
-            $data['_links'][$rel] = $this->_recurseLinks($link);
+            $links = $this->_recurseLinks($link);
+
+            if (!empty($links)) {
+                $data['_links'][$rel] = $links;
+            }
         }
         foreach ($this->_data as $key => $value) {
             $data[$key] = $value;
@@ -172,7 +176,7 @@ class Resource extends AbstractHal
     protected function _recurseEmbedded($embeded)
     {
         $result = array();
-        if($embeded instanceof  self){
+        if($embeded instanceof self){
             $result = $embeded->toArray();
         } else {
             foreach ($embeded as $embed) {
