@@ -287,33 +287,29 @@ class Resource extends AbstractHal
      *
      * @param SimpleXMLElement $xml
      * @param array $data
-     * @param string $key
+     * @param string $keyOverride
      */
-    protected function _addData(SimpleXMLElement $xml, $data, $key = null)
+    protected function _addData(SimpleXMLElement $xml, array $data, $keyOverride = null)
     {
-        if(null !== $key && !is_numeric($key)){
-            $node = $xml->addChild($key);
-            $this->_addData($node, $data);
-        } else {
-            foreach ($data as $_key => $value) {
-                if(!is_numeric($_key) && is_array($value)){
-                    foreach ($value as $v) {
-                        $c = $xml->addChild($_key)->addChild($_key);
-                        foreach ($v as $name => $value) {
-                            $c->addChild($name, $value);
-                        }
-                    }
-                }
-                elseif(!is_numeric($_key) && !is_array($value) && $value){
-                    if($key && !is_numeric($key)){
-                        $_k = $key;
-                    } else {
-                        $_k = $_key;
-                    }
-                        $xml->addChild($_k, $value);
-                } elseif(is_array($value)){
-                    $this->_addData($xml, $value, $_key);
-                }
+        foreach ($data as $key => $value) {
+
+            // alpha-numeric key => array value
+            if(!is_numeric($key) && is_array($value)){
+                $c = $xml->addChild($key);
+                $this->_addData($c, $value, $key);
+            }
+
+            // alpha-numeric key => non-array value
+            elseif(!is_numeric($key) && !is_array($value)){
+                $xml->addChild($key, $value);
+
+            // numeric key => array value
+            } elseif(is_array($value)){
+                $this->_addData($xml, $value);
+
+            // numeric key => non-array value
+            } else {
+                $xml->addChild($keyOverride, $value);
             }
         }
     }
