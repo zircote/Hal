@@ -175,6 +175,9 @@ class Resource extends AbstractHal
      */
     protected function _recurseEmbedded($embeded)
     {
+        if (is_null($embeded)) {
+            return;
+        }
         $result = array();
         if($embeded instanceof self){
             $result = $embeded->toArray();
@@ -250,7 +253,12 @@ class Resource extends AbstractHal
                 $rel = is_numeric($rel) ? $_rel : $rel;
                 $this->_getEmbRes($embed)->addAttribute('rel', $rel);
             } else {
-                $this->_getEmbedded($embed,$rel);
+                if (!is_null($embed)) {
+                    $this->_getEmbedded($embed,$rel);
+                } else {
+                    $rel = is_numeric($rel) ? $_rel : $rel;
+                    $r = $this->_xml->addChild('resource')->addAttribute('rel', $rel);
+                }
             }
         }
     }
