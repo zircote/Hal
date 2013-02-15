@@ -233,8 +233,14 @@ class Resource extends AbstractHal
         }
         $this->_xml = $xml;
         $this->setXMLAttributes($this->_xml, $this->getSelf());
-        foreach ($this->_links as $link) {
-            $this->_addLinks($link);
+        foreach ($this->_links as $links) {
+            if (is_array($links)) {
+                foreach ($links as $link) {
+                    $this->_addLinks($link);
+                }
+            } else {
+                $this->_addLinks($links);
+            }
         }
         $this->_addData($this->_xml, $this->_data);
         $this->_getEmbedded($this->_embedded);
