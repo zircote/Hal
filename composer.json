@@ -1,7 +1,7 @@
 {
     "name":"zircote/hal",
     "type":"library",
-    "version":"0.3.1",
+    "version":"0.3.2",
     "time":"2012-11-27",
     "license":"Apache-2.0",
     "description":"A PHP implementation of HAL http://stateless.co/hal_specification.html",
