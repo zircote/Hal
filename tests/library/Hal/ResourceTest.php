@@ -372,4 +372,49 @@ EOF;
             json_decode($fixture), json_decode((string) $parent)
         );
     }
+    public function testJsonNumericConversion()
+    {
+        $fixture = <<<'EOF'
+{
+    "_links":{
+        "search":{
+            "href":"/dogs?q={text}"
+        }
+    },
+    "data": 98765432
+}
+EOF;
+        $fixture1 = <<<'EOF'
+{
+    "_links":{
+        "search":{
+            "href":"/dogs?q={text}"
+        }
+    },
+    "data": "98765432"
+}
+EOF;
+
+        $parent = new Resource('', array('data' => '98765432'));
+        $parent->setLink(new Link('/dogs?q={text}', 'search'));
+        // Default is off
+        $this->assertEquals(
+            json_decode($fixture1), json_decode((string) $parent)
+        );
+        $parent->setJsonNumericCheck(Resource::JSON_NUMERIC_CHECK_ON);
+        // Active On
+        $this->assertEquals(
+            json_decode($fixture), json_decode((string) $parent)
+        );
+        $parent->setJsonNumericCheck(Resource::JSON_NUMERIC_CHECK_OFF);
+        // Active Off
+        $this->assertEquals(
+            json_decode($fixture1), json_decode((string) $parent)
+        );
+        $parent->setJsonNumericCheck(Resource::JSON_NUMERIC_CHECK_ON);
+        // State Returned
+        $this->assertEquals(
+            json_decode($fixture), json_decode((string) $parent)
+        );
+    }
 }
