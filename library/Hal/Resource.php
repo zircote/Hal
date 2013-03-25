@@ -28,6 +28,15 @@ use SimpleXMLElement;
 class Resource extends AbstractHal
 {
     /**
+     * 
+     */
+    const JSON_NUMERIC_CHECK_ON = true;
+    /**
+     * 
+     */
+    const JSON_NUMERIC_CHECK_OFF = false;
+    
+    /**
      * Internal storage of `Link` objects
      * @var array
      */
@@ -47,6 +56,11 @@ class Resource extends AbstractHal
     protected $_embedded = array();
 
     /**
+     * @var bool
+     */
+    protected $jsonNumericCheck = self::JSON_NUMERIC_CHECK_OFF;
+    /**
+     *
      * @param string $href
      * @param array $data
      * @param string|null $title
@@ -239,7 +253,10 @@ class Resource extends AbstractHal
      */
     public function __toJson()
     {
-        return json_encode($this->toArray(), JSON_NUMERIC_CHECK);
+        if (defined(JSON_NUMERIC_CHECK) && $this->jsonNumericCheck) {
+            return json_encode($this->toArray(), JSON_NUMERIC_CHECK);
+        }
+        return json_encode($this->toArray());
     }
 
     /**
@@ -375,6 +392,24 @@ class Resource extends AbstractHal
     {
         $this->setXMLAttributes($this->_xml->addChild('link'), $link);
 
+        return $this;
+    }
+
+    /**
+     * Sets the ability to perform numeric to int conversion of the JSON output.
+     * 
+     * <b>Example Usage:</b>
+     * <code>
+     * $hal->setJsonNumericCheck($jsonNumericCheck = self::JSON_NUMERIC_CHECK_OFF);
+     * $hal->setJsonNumericCheck($jsonNumericCheck = self::JSON_NUMERIC_CHECK_ON);
+     * </code>
+     * 
+     * @param bool $jsonNumericCheck
+     * @return Resource
+     */
+    public function setJsonNumericCheck($jsonNumericCheck = self::JSON_NUMERIC_CHECK_OFF)
+    {
+        $this->jsonNumericCheck = $jsonNumericCheck;
         return $this;
     }
 }
