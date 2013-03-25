@@ -1,12 +1,13 @@
 <?php
+namespace Hal;
+
 /**
  *
  * @category Hal
  * @package Hal
  */
-namespace Hal;
-use SimpleXMLElement;
 use Hal\Resource;
+
 /**
  *
  * @license http://www.apache.org/licenses/LICENSE-2.0

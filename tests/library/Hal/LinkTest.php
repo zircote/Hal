@@ -1,10 +1,11 @@
 <?php
+namespace Hal\Tests;
+
 /**
  * @category   Hal
  * @package    Hal
  * @subpackage Hal\Tests
  */
-namespace Hal\Tests;
 use Hal\Resource;
 use Hal\Link;
 
