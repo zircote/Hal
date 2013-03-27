@@ -212,7 +212,7 @@ class Resource extends AbstractHal
      */
     public function __toJson()
     {
-        return json_encode($this->toArray());
+        return json_encode($this->toArray(), JSON_NUMERIC_CHECK);
     }
     /**
      *
