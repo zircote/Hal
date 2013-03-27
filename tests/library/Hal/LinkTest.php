@@ -477,11 +477,10 @@ EOF;
         foreach ($dogs as $dog) {
             $parent->setEmbedded('dog', $dog);
         }
-        
+
         $this->assertEquals(
             json_decode($fixture), json_decode((string)$parent)
         );
 
     }
 }
-
