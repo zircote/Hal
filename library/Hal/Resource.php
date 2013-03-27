@@ -1,13 +1,10 @@
 <?php
-/**
- *
- * @category Hal
- * @package Hal
- */
 namespace Hal;
+
 use Hal\Link;
 use Hal\AbstractHal;
 use SimpleXMLElement;
+
 /**
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * Copyright [2012] [Robert Allen]
@@ -35,20 +32,26 @@ class Resource extends AbstractHal
      * @var array
      */
     protected $_links = array();
+
     /**
      * Internal storage of primitive types
      * @var array
      */
+
     protected $_data = array();
     /**
      * Internal storage of `Resource` objects
      * @var array
      */
+
     protected $_embedded = array();
+
     /**
-     *
      * @param string $href
-     * @param string $name
+     * @param array $data
+     * @param string|null $title
+     * @param string|null $name
+     * @param string|null $hreflang
      */
     public function __construct($href, array $data = array(), $title = null, $name = null, $hreflang = null)
     {
@@ -57,6 +60,7 @@ class Resource extends AbstractHal
         );
         $this->setData($data);
     }
+
     /**
      * @return Link
      */
@@ -64,6 +68,7 @@ class Resource extends AbstractHal
     {
         return $this->_links['self'];
     }
+
     /**
      * @return array
      */
@@ -71,7 +76,9 @@ class Resource extends AbstractHal
     {
         return $this->_links;
     }
+
     /**
+     *
      * Add a link to the resource.
      *
      * Per the JSON-HAL specification, a link relation can reference a
@@ -83,6 +90,8 @@ class Resource extends AbstractHal
      * is set to true.
      *
      * @param Link $link
+     * @param bool $singular
+     * @param bool $plural
      * @return Resource
      */
     public function setLink(Link $link, $singular=false, $plural=false)
@@ -103,11 +112,13 @@ class Resource extends AbstractHal
     }
 
     /**
+     *
      * Convenience function to set multiple links at once
      *
-     * @see Resource::setLink()
-     * @param array   $links    Array of Link objects
-     * @param boolean $singular
+     * @param array $links
+     * @param bool $singular
+     * @param bool $plural
+     * @return Resource
      */
     public function setLinks(array $links, $singular = false, $plural = false)
     {
@@ -119,41 +130,47 @@ class Resource extends AbstractHal
     }
 
     /**
-     *
-     * @param array $data
+     * @param $rel
+     * @param null $data
      * @return Resource
      */
     public function setData($rel, $data = null)
     {
-        if(is_array($rel) && null === $data){
+        if (is_array($rel) && null === $data) {
             foreach ($rel as $k => $v) {
                 $this->_data[$k] = $v;
             }
         } else {
             $this->_data[$rel] = $data;
         }
+
         return $this;
     }
+
     /**
-     *
+     * @param string $rel
      * @param Resource $resource
+     * @param bool $singular
      * @return Resource
      */
-    public function setEmbedded($rel,Resource $resource = null, $singular = false)
+    public function setEmbedded($rel, Resource $resource = null, $singular = false)
     {
-        if($singular){
+        if ($singular) {
             $this->_embedded[$rel] = $resource;
         } else {
             $this->_embedded[$rel][] = $resource;
         }
+
         return $this;
     }
+
     /**
      * @return array
      */
     public function toArray()
     {
         $data = array();
+
         foreach ($this->_links as $rel => $link) {
             $links = $this->_recurseLinks($link);
 
@@ -161,24 +178,30 @@ class Resource extends AbstractHal
                 $data['_links'][$rel] = $links;
             }
         }
+
         foreach ($this->_data as $key => $value) {
             $data[$key] = $value;
         }
+
         foreach ($this->_embedded as $rel => $embed) {
             $data['_embedded'][$rel] = $this->_recurseEmbedded($embed);
         }
+
         return $data;
     }
+
     /**
      *
-     * @param mixed $embeded
+     * @param Resource|null|array $embeded
      */
     protected function _recurseEmbedded($embeded)
     {
         if (is_null($embeded)) {
             return;
         }
+
         $result = array();
+
         if($embeded instanceof self){
             $result = $embeded->toArray();
         } else {
@@ -188,11 +211,13 @@ class Resource extends AbstractHal
                 }
             }
         }
+
         return $result;
     }
+
     /**
      *
-     * @param mixed $links
+     * @param array|Link $links
      */
     protected function _recurseLinks($links)
     {
@@ -204,8 +229,10 @@ class Resource extends AbstractHal
                 $result[] = $link->toArray();
             }
         }
+
         return $result;
     }
+
     /**
      *
      * @return string
@@ -214,16 +241,17 @@ class Resource extends AbstractHal
     {
         return json_encode($this->toArray());
     }
+
     /**
-     *
      * @return string
      */
     public function __toString()
     {
         return $this->__toJson();
     }
+
     /**
-     *
+     * @param SimpleXMLElement|null $xml
      * @return SimpleXMLElement
      */
     public function getXML($xml = null)
@@ -231,8 +259,10 @@ class Resource extends AbstractHal
         if(! $xml instanceof SimpleXMLElement){
             $xml = new SimpleXMLElement('<resource></resource>');
         }
+
         $this->_xml = $xml;
         $this->setXMLAttributes($this->_xml, $this->getSelf());
+
         foreach ($this->_links as $links) {
             if (is_array($links)) {
                 foreach ($links as $link) {
@@ -242,10 +272,13 @@ class Resource extends AbstractHal
                 $this->_addLinks($links);
             }
         }
+
         $this->_addData($this->_xml, $this->_data);
         $this->_getEmbedded($this->_embedded);
+
         return $this->_xml;
     }
+
     /**
      *
      * @param mixed $embedded
@@ -268,11 +301,18 @@ class Resource extends AbstractHal
             }
         }
     }
+
+    /**
+     * @param Resource $embed
+     * @return SimpleXMLElement
+     */
     protected function _getEmbRes(Resource $embed)
     {
         $resource = $this->_xml->addChild('resource');
+
         return $embed->getXML($resource);
     }
+
     /**
      *
      * @param SimpleXMLElement $xml
@@ -281,8 +321,10 @@ class Resource extends AbstractHal
     public function setXML(SimpleXMLElement $xml)
     {
         $this->_xml = $xml;
+
         return $this;
     }
+
     /**
      *
      * @param SimpleXMLElement $xml
@@ -292,7 +334,6 @@ class Resource extends AbstractHal
     protected function _addData(SimpleXMLElement $xml, array $data, $keyOverride = null)
     {
         foreach ($data as $key => $value) {
-
             // alpha-numeric key => array value
             if(!is_numeric($key) && is_array($value)){
                 $c = $xml->addChild($key);
@@ -313,6 +354,7 @@ class Resource extends AbstractHal
             }
         }
     }
+
     /**
      *
      * @param Link $link
@@ -323,6 +365,7 @@ class Resource extends AbstractHal
             $this->_addLink($link);
         }
     }
+
     /**
      *
      * @param Link $link
@@ -331,6 +374,7 @@ class Resource extends AbstractHal
     protected function _addLink(Link $link)
     {
         $this->setXMLAttributes($this->_xml->addChild('link'), $link);
+
         return $this;
     }
 }

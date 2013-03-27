@@ -1,12 +1,9 @@
 <?php
-/**
- *
- * @category Hal
- * @package Hal
- */
 namespace Hal;
+
 use SimpleXMLElement;
 use Hal\Link;
+
 /**
  *
  * @license http://www.apache.org/licenses/LICENSE-2.0
@@ -26,16 +23,14 @@ use Hal\Link;
  *
  * @category Hal
  * @package Hal
- *
- *
  */
 abstract class AbstractHal
 {
     /**
-     *
      * @var SimpleXMLElement
      */
     protected $_xml;
+
     /**
      * @param SimpleXMLElement $xml
      * @param Link $link
@@ -44,18 +39,23 @@ abstract class AbstractHal
     public function setXMLAttributes(SimpleXMLElement $xml, Link $link)
     {
         $xml->addAttribute('href', $link->getHref());
-        if($link->getRel() && $link->getRel() !== 'self'){
+
+        if ($link->getRel() && $link->getRel() !== 'self') {
             $xml->addAttribute('rel', $link->getRel());
         }
-        if($link->getName()){
+
+        if ($link->getName()) {
             $xml->addAttribute('name', $link->getName());
         }
-        if($link->getTitle()){
+
+        if ($link->getTitle()) {
             $xml->addAttribute('title', $link->getTitle());
         }
-        if($link->getHreflang()){
+
+        if ($link->getHreflang()) {
             $xml->addAttribute('hreflang', $link->getHreflang());
         }
+
         return $this;
     }
 }
