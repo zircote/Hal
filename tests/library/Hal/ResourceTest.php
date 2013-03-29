@@ -1,12 +1,14 @@
 <?php
+namespace Hal\Tests;
+
 /**
  * @category Hal
  * @package Hal
  * @subpackage Hal\Tests
  */
-namespace Hal\Tests;
 use Hal\Resource;
 use Hal\Link;
+
 /**
  * @license http://www.apache.org/licenses/LICENSE-2.0
  * Copyright [2012] [Robert Allen]

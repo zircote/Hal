@@ -1,12 +1,8 @@
 <?php
-/**
- *
- * @category Hal
- * @package Hal
- */
 namespace Hal;
-use SimpleXMLElement;
+
 use Hal\Resource;
+
 /**
  *
  * @license http://www.apache.org/licenses/LICENSE-2.0
@@ -33,6 +29,7 @@ class Link extends AbstractHal
      * @var string
      */
     protected $_title;
+
     /**
      * For identifying how the target URI relates to the 'Subject Resource'.
      * The Subject Resource is the closest parent Resource element.
@@ -40,6 +37,7 @@ class Link extends AbstractHal
      * @var string
      */
     protected $_rel;
+
     /**
      * - <b>As a resource:</b>
      *     Content embedded within a Resource element MAY be a full, partial, summary,
@@ -53,6 +51,7 @@ class Link extends AbstractHal
      * @var string
      */
     protected $_href;
+
     /**
      *
      * For distinguishing between Resource and Link elements that share the
@@ -62,6 +61,7 @@ class Link extends AbstractHal
      * @var string
      */
     protected $_name;
+
     /**
      * For indicating what the language of the result of dereferencing the
      * link should be.
@@ -94,6 +94,7 @@ class Link extends AbstractHal
             ->setHreflang($hreflang)
             ->setTemplated($templated);
     }
+
     /**
      * @return string
      */
@@ -109,6 +110,7 @@ class Link extends AbstractHal
     {
         return $this->_href;
     }
+
     /**
      *
      * @return string
@@ -117,6 +119,7 @@ class Link extends AbstractHal
     {
         return $this->_name;
     }
+
     /**
      * @return string
      */
@@ -148,8 +151,10 @@ class Link extends AbstractHal
     public function setRel ($rel)
     {
         $this->_rel = $rel;
+
         return $this;
     }
+
     /**
      * @param string $href
      * @return Link
@@ -157,8 +162,10 @@ class Link extends AbstractHal
     public function setHref ($href)
     {
         $this->_href = $href;
+
         return $this;
     }
+
     /**
      *
      * @param string $name
@@ -167,8 +174,10 @@ class Link extends AbstractHal
     public function setName($name)
     {
         $this->_name = $name;
+
         return $this;
     }
+
     /**
      * @param string $title
      * @return Link
@@ -176,6 +185,7 @@ class Link extends AbstractHal
     public function setTitle ($title)
     {
         $this->_title = $title;
+
         return $this;
     }
 
@@ -186,6 +196,7 @@ class Link extends AbstractHal
     public function setHreflang ($hreflang)
     {
         $this->_hreflang = $hreflang;
+
         return $this;
     }
 
@@ -196,11 +207,11 @@ class Link extends AbstractHal
     public function setTemplated($templated)
     {
         $this->_templated = $templated;
+
         return $this;
     }
 
     /**
-     *
      * @return array
      */
     public function toArray()
@@ -211,21 +222,27 @@ class Link extends AbstractHal
         }
 
         $link = array('href' => $href);
-        if($this->getTitle()){
+
+        if ($this->getTitle()) {
             $link['title'] = $this->getTitle();
         }
-        if($this->getTitle()){
+
+        if ($this->getTitle()) {
             $link['title'] = $this->getTitle();
         }
-        if($this->getName()){
+
+        if ($this->getName()) {
             $link['name'] = $this->getName();
         }
-        if($this->getHreflang()){
+
+        if ($this->getHreflang()) {
             $link['hreflang'] = $this->getHreflang();
         }
+
         if ($this->getTemplated()) {
             $link['templated'] = $this->getTemplated();
         }
+
         return $link;
     }
 }

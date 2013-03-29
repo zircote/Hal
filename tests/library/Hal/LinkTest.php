@@ -1,10 +1,11 @@
 <?php
+namespace Hal\Tests;
+
 /**
  * @category   Hal
  * @package    Hal
  * @subpackage Hal\Tests
  */
-namespace Hal\Tests;
 use Hal\Resource;
 use Hal\Link;
 
@@ -476,11 +477,10 @@ EOF;
         foreach ($dogs as $dog) {
             $parent->setEmbedded('dog', $dog);
         }
-        
+
         $this->assertEquals(
             json_decode($fixture), json_decode((string)$parent)
         );
 
     }
 }
-
