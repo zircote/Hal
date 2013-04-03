@@ -30,11 +30,11 @@ HAL has two main components: Resources and Links.
   <email>zircote@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2012-11-26</date>
- <time>01:53:15</time>
+ <date>2013-04-03</date>
+ <time>13:21:14</time>
  <version>
-  <release>0.2.0</release>
-  <api>0.2.0</api>
+  <release>0.3.3</release>
+  <api>0.3.3</api>
  </version>
  <stability>
   <release>beta</release>
@@ -80,15 +80,6 @@ This is an alpha release, see readme.md for examples.
      <tasks:replace from="@package_version@" to="version" type="package-info" />
     </file>
    </dir> <!-- /tests -->
-   <dir name="vendor">
-    <dir name="composer">
-     <file baseinstalldir="/" name="autoload_classmap.php" role="php" />
-     <file baseinstalldir="/" name="autoload_namespaces.php" role="php" />
-     <file baseinstalldir="/" name="autoload_real.php" role="php" />
-     <file baseinstalldir="/" name="ClassLoader.php" role="php" />
-    </dir> <!-- /vendor/composer -->
-    <file baseinstalldir="/" name="autoload.php" role="php" />
-   </dir> <!-- /vendor -->
    <file baseinstalldir="/" name="CHANGELOG" role="doc" />
    <file baseinstalldir="/" name="Hal.iml" role="data" />
    <file baseinstalldir="/" name="LICENSE-2.0.txt" role="doc" />
@@ -117,14 +108,14 @@ This is an alpha release, see readme.md for examples.
  <changelog>
   <release>
    <version>
-    <release>0.2.0</release>
-    <api>0.2.0</api>
+    <release>0.3.3</release>
+    <api>0.3.3</api>
    </version>
    <stability>
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2012-11-26</date>
+   <date>2013-04-03</date>
    <license uri="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</license>
    <notes>
 This is an alpha release, see readme.md for examples.

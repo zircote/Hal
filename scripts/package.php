@@ -30,7 +30,7 @@ function readDirectory($path)
 
 $outsideDir = realpath(dirname(dirname(__FILE__)));
 
-$version = file_get_contents($outsideDir . '/VERSION');
+$version = trim(file_get_contents($outsideDir . '/VERSION'));
 
 $api_version     = $version;
 $api_state       = 'beta';
