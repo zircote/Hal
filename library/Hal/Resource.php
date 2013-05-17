@@ -62,7 +62,7 @@ class Resource extends AbstractHal
 
     /**
      *
-     * @param string $href
+     * @param string|\Hal\Link $href
      * @param array $data
      * @param string|null $title
      * @param string|null $name
@@ -70,9 +70,11 @@ class Resource extends AbstractHal
      */
     public function __construct($href, array $data = array(), $title = null, $name = null, $hreflang = null)
     {
-        $this->setLink(
-            $this->createLink($href, 'self', $title, $name, $hreflang)
-        );
+        if(!($href instanceof Link)) {
+            $href = $this->createLink($href, 'self', $title, $name, $hreflang);
+        }
+
+        $this->setLink($href);
         $this->setData($data);
     }
 
