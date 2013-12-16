@@ -122,3 +122,4 @@ echo $parent->getXML()->asXML();
     </resource>
 </resource>
 ```
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/zircote/hal/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
