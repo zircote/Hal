@@ -29,7 +29,31 @@ use Hal\Link;
  */
 class ResourceTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetSingleLink()
+	public function testConstructWithLinkObject()
+	{
+		$self = new Link('/dogs', 'self');
+
+		$parent = new Resource($self);
+		
+		$actual = json_decode($parent);
+
+
+        $JSON = <<<EOF
+{
+   "_links":{
+      "self":{
+         "href":"\/dogs"
+      }
+   }
+}
+EOF;
+
+		$expected = json_decode($JSON);
+
+		$this->assertEquals($expected, $actual);	
+	}
+
+	public function testSetSingleLink()
     {
         $parent = new Resource('/dogs');
         $parent->setLink(new Link('/dogs?q={text}', 'search'));
