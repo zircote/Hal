@@ -2,6 +2,7 @@
 namespace Hal;
 
 use Hal\Link;
+use Hal\SelfLink;
 use Hal\AbstractHal;
 use SimpleXMLElement;
 
@@ -62,7 +63,7 @@ class Resource extends AbstractHal
 
     /**
      *
-     * @param string $href
+     * @param string|\Hal\SelfLink $href
      * @param array $data
      * @param string|null $title
      * @param string|null $name
@@ -70,18 +71,20 @@ class Resource extends AbstractHal
      */
     public function __construct($href, array $data = array(), $title = null, $name = null, $hreflang = null)
     {
-        $this->setLink(
-            $this->createLink($href, 'self', $title, $name, $hreflang)
-        );
+        if(!($href instanceof SelfLink)) {
+            $href = $this->createLink($href, $title, $name, $hreflang);
+        }
+
+        $this->setLink($href);
         $this->setData($data);
     }
 
     /**
      * @return Link
      */
-    protected function createLink($href, $rel, $title, $name, $hreflang)
+    protected function createLink($href, $title, $name, $hreflang)
     {
-        return new Link($href, $rel, $title, $name, $hreflang);
+        return new SelfLink($href, $title, $name, $hreflang);
     }
 
     /**
