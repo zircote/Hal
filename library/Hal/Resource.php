@@ -59,6 +59,7 @@ class Resource extends AbstractHal
      * @var bool
      */
     protected $jsonNumericCheck = self::JSON_NUMERIC_CHECK_OFF;
+
     /**
      *
      * @param string $href
@@ -70,9 +71,17 @@ class Resource extends AbstractHal
     public function __construct($href, array $data = array(), $title = null, $name = null, $hreflang = null)
     {
         $this->setLink(
-            new Link($href, 'self', $title, $name, $hreflang)
+            $this->createLink($href, 'self', $title, $name, $hreflang)
         );
         $this->setData($data);
+    }
+
+    /**
+     * @return Link
+     */
+    protected function createLink($href, $rel, $title, $name, $hreflang)
+    {
+        return new Link($href, $rel, $title, $name, $hreflang);
     }
 
     /**
