@@ -8,6 +8,7 @@ namespace Hal\Tests;
  */
 use Hal\Resource;
 use Hal\Link;
+use Hal\SelfLink;
 
 /**
  * @license http://www.apache.org/licenses/LICENSE-2.0
@@ -31,7 +32,7 @@ class ResourceTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructWithLinkObject()
     {
-        $self = new Link('/dogs', 'self');
+        $self = new SelfLink('/dogs');
 
         $parent = new Resource($self);
 
