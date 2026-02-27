@@ -1,0 +1,20 @@
+# Dependabot Auto-Merge
+# Automatically approves and merges Dependabot PRs after CI passes
+#
+# This workflow calls the centralized auto-merge workflow from zircote/.github
+# Requires repository setting "Allow auto-merge" to be enabled
+
+name: Dependabot Auto-Merge
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    uses: zircote/.github/.github/workflows/reusable-dependabot-automerge.yml@main
+    secrets: inherit
